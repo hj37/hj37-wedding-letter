@@ -665,8 +665,8 @@
     if (!boardEl || !movesEl || !combosEl || !status || !restart || !result) return;
 
     const size = 8;
-    const moveLimit = 50;
-    const goal = 5;
+    const moveLimit = 20;
+    const goal = 50;
     const tiles = [
       { icon: '💍', name: '반지' },
       { icon: '🤍', name: '하트' },
