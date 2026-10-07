@@ -1462,3 +1462,5 @@ html, body { background: #e9e8e3; color: var(--color-text); }
 .minimi-save-note { color: #77736b; }
 .account, .venue, .rsvp, .guestbook, .share { background-color: #f7f6f2; }
 a { color: var(--color-accent); }
+[hidden] { display: none !important; }
+
