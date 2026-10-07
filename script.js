@@ -879,8 +879,6 @@
       const guestName = String(data.get('guest_name') || '').trim();
       const attending = String(data.get('attending') || '') === 'yes';
       if (!form.reportValidity()) return;
-        return;
-      }
       submit.disabled = true;
       status.textContent = '회신을 보내고 있어요.';
       try {
