@@ -10,7 +10,6 @@
   // PLACEHOLDERS — 실제 운영 시 아래 값을 채워주세요.
   // ---------------------------------------------------------
   const KAKAO_JS_KEY     = ''; // placeholder: 카카오 JavaScript 키 (https://developers.kakao.com/)
-  const RSVP_FORM_URL    = ''; // placeholder: Tally / Google Form / FormSubmit URL
   const GUESTBOOK_URL    = ''; // placeholder: 외부 방명록 폼 URL
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
   const BGM_SRC          = ''; // placeholder: 사용 허가된 음원 파일 경로 (예: 'audio/bgm.mp3')
@@ -211,12 +210,12 @@
       ddayNum.dataset.target = String(diff);
       ddayNum.textContent = isReduced() ? String(diff) : '0';
     } else if (diff === 0) {
-      ddayBlock.innerHTML = '<span class="script" style="font-size:24px;color:var(--color-primary)">오늘</span><br><span style="font-size:14px;color:var(--color-muted)">저희 두 사람의 약속이 시작됩니다</span>';
+      ddayBlock.innerHTML = '<span class="script" style="font-size:24px;color:var(--color-primary)">오늘</span><br><span style="font-size:14px;color:var(--color-muted)">두 사람이 부부가 됩니다</span>';
       if (ddayLabel) ddayLabel.style.display = 'none';
     } else {
       ddayNum.dataset.target = String(-diff);
       ddayNum.textContent = isReduced() ? String(-diff) : '0';
-      if (ddayLabel) ddayLabel.textContent = `함께 걸어가는 날 +`;
+      if (ddayLabel) ddayLabel.textContent = '결혼한 지';
       ddayBlock.firstChild.textContent = 'D + ';
     }
 
@@ -529,6 +528,11 @@
     const btn = $('#music-toggle');
     const audio = $('#bgm');
     if (!btn || !audio) return;
+    if (!BGM_SRC) {
+      btn.hidden = true;
+      return;
+    }
+    btn.hidden = false;
     audio.volume = 0;
 
     function fadeVolume(target, dur) {
@@ -544,10 +548,6 @@
     }
 
     btn.addEventListener('click', async () => {
-      if (!BGM_SRC) {
-        showToast('배경음악은 준비 중이에요');
-        return;
-      }
       btn.classList.remove('is-rippling');
       void btn.offsetWidth;
       btn.classList.add('is-rippling');
@@ -564,7 +564,7 @@
         }
       } catch (e) {
         btn.setAttribute('aria-pressed', 'false');
-        showToast('배경음악을 재생할 수 없어요');
+        showToast('음원을 재생할 수 없습니다.');
       }
     });
   }
@@ -603,22 +603,22 @@
       addButton.disabled = entries.length >= 36;
     };
     const request = async (method, body) => {
-      if (!SUPABASE_KEY) throw new Error('공유 저장소 설정이 아직 완료되지 않았어요.');
+      if (!SUPABASE_KEY) throw new Error('미니미 기능을 이용할 수 없습니다.');
       const response = await fetch(`${SUPABASE_URL}/rest/v1/wedding_guest_minimis${method === 'GET' ? '?select=minimi_id,created_at&order=created_at.asc&limit=36' : ''}`, {
         method,
         headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         ...(body ? { body: JSON.stringify(body) } : {})
       });
-      if (!response.ok) throw new Error(`저장 요청 오류 (${response.status})`);
+      if (!response.ok) throw new Error('미니미를 저장하지 못했어요. 잠시 후 다시 시도해 주세요.');
       return method === 'GET' ? response.json() : undefined;
     };
     const load = async () => {
       try {
         entries = await request('GET');
         render();
-        note.textContent = '하객 모두의 미니미가 이곳에 함께 보여요.';
+        note.textContent = '미니미가 정원에 모였어요.';
       } catch (error) {
-        note.textContent = '공유 미니미 저장소를 연결하는 중입니다.';
+        note.textContent = '미니미를 불러오지 못했어요.';
         addButton.disabled = false;
       }
     };
@@ -639,10 +639,10 @@
       try {
         await request('POST', { minimi_id: selected });
         await load();
-        speech.textContent = '미니미가 정원에 도착했어요 ♡';
+        speech.textContent = '정원에서 만나요!';
         haptic(12);
       } catch (error) {
-        showToast(error.message || '미니미를 저장하지 못했어요');
+        showToast(error.message || '미니미를 저장하지 못했어요.');
       } finally {
         addButton.disabled = entries.length >= 36;
       }
@@ -704,43 +704,25 @@
   // 11. RSVP / Guestbook placeholder URL handling
   // ---------------------------------------------------------
   function setupExternalLinks() {
-    const rsvp = $('#rsvp-link');
     const gb   = $('#guestbook-link');
-    if (rsvp) {
-      if (RSVP_FORM_URL) {
-        rsvp.href = RSVP_FORM_URL;
-        rsvp.removeAttribute('data-placeholder-url');
-      } else {
-        rsvp.addEventListener('click', (e) => {
-          e.preventDefault();
-          showToast('참석 의사 폼은 준비 중입니다');
-        });
-      }
-    }
     const mybox = $('#mybox-upload');
     if (mybox) {
       if (MYBOX_UPLOAD_URL) {
         mybox.href = MYBOX_UPLOAD_URL;
         mybox.target = '_blank';
         mybox.rel = 'noopener';
+        mybox.hidden = false;
         mybox.removeAttribute('data-placeholder-url');
-        mybox.textContent = '하객 사진 올리기 (MYBOX)';
-      } else {
-        mybox.addEventListener('click', (e) => {
-          e.preventDefault();
-          showToast('MYBOX 공유 폴더 링크를 연결하면 열립니다');
-        });
+        mybox.textContent = '하객 사진 더하기';
       }
     }
     if (gb) {
       if (GUESTBOOK_URL) {
         gb.href = GUESTBOOK_URL;
+        gb.hidden = false;
+        gb.target = '_blank';
+        gb.rel = 'noopener';
         gb.removeAttribute('data-placeholder-url');
-      } else {
-        gb.addEventListener('click', (e) => {
-          e.preventDefault();
-          showToast('방명록은 준비 중입니다');
-        });
       }
     }
   }
@@ -775,3 +757,4 @@
     init();
   }
 })();
+
