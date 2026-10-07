@@ -1418,3 +1418,47 @@ body { background-image: none; }
   .hero-editorial { padding: 36px 18px 48px; }
   .hero-date { margin-top: -19px; }
 }
+
+/* Refined palette: quiet stone, warm ivory, charcoal, and restrained bronze. */
+:root {
+  --color-primary: #8b7964;
+  --color-secondary: #d9d7d1;
+  --color-accent: #77634d;
+  --color-bg: #f7f6f2;
+  --color-surface: #efeee9;
+  --color-text: #292a29;
+  --color-muted: #77756f;
+}
+html, body { background: #e9e8e3; color: var(--color-text); }
+.card { background: #f7f6f2; box-shadow: 0 12px 48px #26251f12; }
+.hero { background: #f7f6f2; }
+.hero-eyebrow, .section-eyebrow { color: #817e76; }
+.hero-name-ko, .section-title { color: #292a29; }
+.hero-amp, .hero-date span { color: #8b7964; }
+.hero-date { color: #282927; }
+.hero-info { color: #5f5e59; }
+.hero-gallery-link, .gallery-hint { color: #746f66; }
+.gallery-section { background: #efeee9; }
+.gallery-dots li { background: #d1cec6; }
+.gallery-dots li.active { background: #84735e; }
+.couple-quote { border-color: #d9d6cf; color: #333330; }
+.couple-quote footer, .hero-photo-card figcaption { color: #817e76; }
+.section { border-bottom-color: #e4e2dc; }
+.btn { border-color: #b8b2a7; color: #5f5548; }
+.btn:hover, .btn.primary { border-color: #77634d; background: #77634d; color: #fff; }
+.btn.primary:hover { border-color: #675540; background: #675540; }
+.guestbook { border-color: #ddd9d1; background: #f0efeb; }
+.miniroom-layout {
+  background-color: #f3f2ed;
+  background-image: linear-gradient(#d5d7d2aa 1px,transparent 1px),linear-gradient(90deg,#d5d7d2aa 1px,transparent 1px);
+}
+.miniroom-topbar { background: #e9e8e2; }
+.miniroom-tabs { border-bottom-color: #d9d7d0; }
+.miniroom-tabs a.is-current { color: #3b3a36; border-bottom-color: #8b7964; }
+.miniroom-track { border-color: #e1dfd8; background: #f4f3ef; color: #6c6962; }
+.minimi-choice { border-color: #e0ded8; background: #f9f8f4; color: #55534d; }
+.minimi-choice.is-selected { border-color: #8b7964; background: #f0eee8; box-shadow: inset 0 0 0 1px #8b7964; }
+.minimi-choice:focus-visible, .minimi-add-button:focus-visible { outline-color: #77634d; }
+.minimi-save-note { color: #77736b; }
+.account, .venue, .rsvp, .guestbook, .share { background-color: #f7f6f2; }
+a { color: var(--color-accent); }
