@@ -917,36 +917,15 @@ body::before {
   text-align: left;
 }
 .acc-group + .acc-group { margin-top: 14px; }
-.acc-group summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 16px 20px;
+.acc-group-title {
+  margin: 0;
+  padding: 16px 20px 4px;
   font-family: var(--font-ko-serif);
   font-weight: 700;
   font-size: 14.5px;
   color: var(--color-accent);
   letter-spacing: 0.04em;
-  position: relative;
-  user-select: none;
-  transition: background var(--dur-base) var(--ease-standard);
 }
-.acc-group summary::-webkit-details-marker { display: none; }
-.acc-group summary::after {
-  content: '';
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid var(--color-accent);
-  border-bottom: 1.5px solid var(--color-accent);
-  transform: translateY(-70%) rotate(45deg);
-  transition: transform var(--dur-base) var(--ease-standard);
-}
-.acc-group[open] summary::after {
-  transform: translateY(-30%) rotate(-135deg);
-}
-.acc-group[open] summary { background: rgba(201, 162, 162, 0.08); }
 
 .acc-list {
   list-style: none;
