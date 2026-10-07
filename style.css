@@ -1554,3 +1554,12 @@ a { color: var(--color-accent); }
   font-feature-settings: "lnum" 1, "tnum" 1;
   letter-spacing: 0;
 }
+
+
+/* Preserve the wide fourth gallery photo inside the portrait carousel frame. */
+.gallery-slide img.gallery-landscape {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #efefed;
+}
