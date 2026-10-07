@@ -666,7 +666,7 @@
 
     const size = 8;
     const moveLimit = 20;
-    const goal = 50;
+    const goal = 15;
     const tiles = [
       { icon: '💍', name: '반지' },
       { icon: '🤍', name: '하트' },
