@@ -1562,3 +1562,23 @@ a { color: var(--color-accent); }
   object-fit: contain;
   background: #efefed;
 }
+
+
+/* Slightly larger portrait gallery; match the provided 2:3 photos to avoid cropping heads. */
+.gallery-stage {
+  max-width: 340px;
+  aspect-ratio: 2 / 3;
+}
+.gallery-slide img {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+}
+.gallery-slide img.gallery-landscape {
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  background: #efefed;
+}
