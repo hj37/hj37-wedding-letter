@@ -1517,3 +1517,40 @@ html, body { background: #e9e8e3; color: var(--color-text); }
 a { color: var(--color-accent); }
 [hidden] { display: none !important; }
 
+
+
+/* Clear, consistently shaped numerals in the wedding date and calendar. */
+.date-headline,
+.cal,
+.dday {
+  font-family: var(--font-ko-sans), Arial, sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+.date-headline { letter-spacing: .02em; }
+.cal th { letter-spacing: .08em; }
+.cal td { height: 42px; padding: 2px 0; }
+.cal td span {
+  position: relative;
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.cal td.today { color: var(--color-text); }
+.cal td.today::before { display: none; }
+.cal td.today span {
+  color: #fff;
+  background: var(--color-primary);
+  font-weight: 700;
+}
+.dday { letter-spacing: .01em; }
+.dday span {
+  font-family: var(--font-ko-sans), Arial, sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+  letter-spacing: 0;
+}

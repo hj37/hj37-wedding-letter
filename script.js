@@ -216,7 +216,7 @@
       ddayNum.dataset.target = String(-diff);
       ddayNum.textContent = isReduced() ? String(-diff) : '0';
       if (ddayLabel) ddayLabel.textContent = '결혼한 지';
-      ddayBlock.firstChild.textContent = 'D + ';
+      ddayBlock.firstChild.textContent = 'D+';
     }
 
     // count-up 애니메이션
