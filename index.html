@@ -35,14 +35,12 @@
   <canvas class="bg-petals" aria-hidden="true"></canvas>
 
 
-  <!-- 음악 토글 (BGM placeholder) -->
-  <button class="music-toggle" id="music-toggle" type="button" aria-label="배경 음악 재생/일시정지" aria-pressed="false">
+  <button class="music-toggle" id="music-toggle" type="button" aria-label="배경 음악 재생/일시정지" aria-pressed="false" hidden>
     <span class="ico-note" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="18" height="18"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="18" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
     </span>
     <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
   </button>
-  <!-- placeholder: script.js의 BGM_SRC에 사용 허가된 음원 경로를 입력하면 재생됩니다 -->
   <audio id="bgm" loop preload="none"></audio>
 
   <main class="card" id="card">
@@ -57,12 +55,11 @@
           <span class="hero-name-ko" data-hero-step="3">박선영</span>
         </h1>
         <figure class="hero-photo-card" data-hero-step="4">
-          <img class="hero-illustration" src="images/hero-photo-slot.svg" alt="두 사람의 웨딩 사진이 들어갈 자리" fetchpriority="high" width="900" height="1125">
-          <figcaption>OUR PHOTO · 사진을 보내주시면 이 자리에 넣을게요</figcaption>
+          <img class="hero-illustration" src="images/hero-photo-slot.svg" alt="윤호진과 박선영의 웨딩 사진" fetchpriority="high" width="900" height="1125">
         </figure>
         <p class="hero-date en" data-hero-step="5">03<span>.</span>06</p>
         <p class="hero-info" data-hero-step="6">2027년 3월 6일 토요일 오후 1시 40분<br>창원 세코 더 그레이드 웨딩홀</p>
-        <a class="hero-gallery-link" href="#gallery" data-hero-step="7">사진첩 먼저 보기 <span aria-hidden="true">↓</span></a>
+        <a class="hero-gallery-link" href="#gallery" data-hero-step="7">사진첩 보기 <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
@@ -70,21 +67,19 @@
     <section class="section gallery-section reveal" id="gallery" aria-labelledby="gallery-heading">
       <p class="section-eyebrow en">PHOTO ALBUM</p>
       <h2 class="section-title" id="gallery-heading">두 사람의 사진첩</h2>
-      <p class="gallery-message">공개해도 괜찮은 사진을 골라 보내주시면<br>첫 화면과 이 앨범에 함께 채워 넣을게요.</p>
-      <div class="gallery-stage" role="region" aria-label="사진 갤러리" aria-roledescription="carousel">
+      <div class="gallery-stage" role="region" aria-label="웨딩 사진 갤러리" aria-roledescription="carousel">
         <ul class="gallery-track" id="gallery-track">
-          <li class="gallery-slide" aria-label="사진 1 / 5"><img src="images/gallery-slot-1.svg" alt="사진 1 업로드 예정" loading="eager" width="900" height="1125"></li>
-          <li class="gallery-slide" aria-label="사진 2 / 5"><img src="images/gallery-slot-2.svg" alt="사진 2 업로드 예정" loading="lazy" width="900" height="1125"></li>
-          <li class="gallery-slide" aria-label="사진 3 / 5"><img src="images/gallery-slot-3.svg" alt="사진 3 업로드 예정" loading="lazy" width="900" height="1125"></li>
-          <li class="gallery-slide" aria-label="사진 4 / 5"><img src="images/gallery-slot-4.svg" alt="사진 4 업로드 예정" loading="lazy" width="900" height="1125"></li>
-          <li class="gallery-slide" aria-label="사진 5 / 5"><img src="images/gallery-slot-5.svg" alt="사진 5 업로드 예정" loading="lazy" width="900" height="1125"></li>
+          <li class="gallery-slide" aria-label="사진 1 / 5"><img src="images/gallery-slot-1.svg" alt="웨딩 사진 1" loading="eager" width="900" height="1125"></li>
+          <li class="gallery-slide" aria-label="사진 2 / 5"><img src="images/gallery-slot-2.svg" alt="웨딩 사진 2" loading="lazy" width="900" height="1125"></li>
+          <li class="gallery-slide" aria-label="사진 3 / 5"><img src="images/gallery-slot-3.svg" alt="웨딩 사진 3" loading="lazy" width="900" height="1125"></li>
+          <li class="gallery-slide" aria-label="사진 4 / 5"><img src="images/gallery-slot-4.svg" alt="웨딩 사진 4" loading="lazy" width="900" height="1125"></li>
+          <li class="gallery-slide" aria-label="사진 5 / 5"><img src="images/gallery-slot-5.svg" alt="웨딩 사진 5" loading="lazy" width="900" height="1125"></li>
         </ul>
         <button class="gallery-nav gallery-prev" type="button" aria-label="이전 사진"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="gallery-nav gallery-next" type="button" aria-label="다음 사진"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </div>
       <ol class="gallery-dots" id="gallery-dots" aria-hidden="true"><li class="active"></li><li></li><li></li><li></li><li></li></ol>
-      <p class="gallery-hint">사진을 누르면 크게 볼 수 있어요</p>
-      <a class="btn gallery-upload" id="mybox-upload" href="#gallery" data-placeholder-url>하객 사진 올리기 (MYBOX 준비중)</a>
+      <a class="btn gallery-upload" id="mybox-upload" href="#gallery" data-placeholder-url hidden>하객 사진 더하기</a>
     </section>
 
     <!-- 2. GREETING -->
@@ -92,20 +87,17 @@
       <p class="section-eyebrow en">INVITATION</p>
       <h2 class="section-title" id="greeting-heading">초대합니다</h2>
       <blockquote class="couple-quote">
-        <p>말보다 행동으로,<br>서로의 평화를 지켜주는 부부가 되겠습니다.</p>
-        <footer>나는 SOLO 23기 어록에서 영감을 받아</footer>
+        <p>당신과 함께라면,<br>평범한 하루도 오래 간직하고 싶은 날이 됩니다.</p>
       </blockquote>
       <div class="greeting-body">
-        <p class="reveal-line">서로의 가장 든든한 편이 되어</p>
-        <p class="reveal-line">기쁜 날도 흔들리는 날도</p>
-        <p class="reveal-line">나란히 걸어가겠습니다.</p>
+        <p class="reveal-line">서로의 하루를 나누고</p>
+        <p class="reveal-line">기쁜 날에도 어려운 날에도</p>
+        <p class="reveal-line">가장 가까운 편이 되겠습니다.</p>
         <p class="reveal-line spacer">&nbsp;</p>
-        <p class="reveal-line">설레는 마음과 다정한 약속을 모아</p>
-        <p class="reveal-line">새로운 한 걸음을 내딛는 자리에</p>
-        <p class="reveal-line">귀한 걸음 더해 주신다면,</p>
-        <p class="reveal-line">오래 기억될 하루가 되겠습니다.</p>
+        <p class="reveal-line">두 사람이 부부로 첫걸음을 내딛는 날,</p>
+        <p class="reveal-line">소중한 분들과 함께하고 싶습니다.</p>
+        <p class="reveal-line">오셔서 축복해 주시면 감사하겠습니다.</p>
       </div>
-      <p class="greeting-en script">Our little room, our forever.</p>
     </section>
 
     <!-- 3. COUPLE INTRO -->
@@ -117,7 +109,6 @@
         <article class="couple-card couple-groom">
           <p class="parents"><span>윤태환</span> · <span>주은정</span> 의 아들</p>
           <p class="couple-name">윤호진 <span class="en">Hojin Yoon</span></p>
-          <p class="couple-bio">한 걸음씩, 진심을 닮아가는 사람.</p>
         </article>
 
         <span class="couple-amp script" aria-hidden="true">&amp;</span>
@@ -125,7 +116,6 @@
         <article class="couple-card couple-bride">
           <p class="parents"><span>박문수</span> · <span>하미화</span> 의 딸</p>
           <p class="couple-name">박선영 <span class="en">Sunyoung Park</span></p>
-          <p class="couple-bio">곁에 머물수록 따뜻해지는 사람.</p>
         </article>
       </div>
     </section>
@@ -162,8 +152,8 @@
     <!-- A tiny outdoor wedding garden, with a separate guest minimi picker -->
     <section class="section miniroom-section reveal" id="miniroom" aria-labelledby="miniroom-heading">
       <p class="section-eyebrow en">OUR GARDEN WEDDING</p>
-      <h2 class="section-title" id="miniroom-heading">미니미와 함께하는 작은 정원</h2>
-      <p class="miniroom-intro">작은 미니미가 되어 두 사람의 야외 예식에 놀러오세요.</p>
+      <h2 class="section-title" id="miniroom-heading">미니미로 채우는 작은 정원</h2>
+      <p class="miniroom-intro">미니미로 두 사람의 정원에 함께해 주세요.</p>
 
       <div class="miniroom-shell">
         <header class="miniroom-topbar">
@@ -171,7 +161,7 @@
           <p class="miniroom-url">창원 · 2027.03.06</p>
         </header>
         <nav class="miniroom-tabs" aria-label="미니홈피 메뉴">
-          <a href="#hero">초대장</a><a href="#gallery">사진첩</a><a href="#guestbook" class="is-current">방명록</a>
+          <a href="#hero">홈</a><a href="#gallery">사진첩</a><a href="#guestbook" class="is-current">방명록</a>
         </nav>
         <div class="miniroom-layout">
           <div class="miniroom-main">
@@ -195,16 +185,16 @@
                 <rect x="195" y="199" width="34" height="1" fill="#aeb0ab"/><rect x="235" y="199" width="34" height="1" fill="#aeb0ab"/>
                 <rect x="15" y="271" width="450" height="3" fill="#c7cac5"/>
               </svg>
-              <span class="miniroom-speech" id="miniroom-speech" aria-live="polite">오늘 저희 정원에 와주셔서 반가워요 ♡</span>
+              <span class="miniroom-speech" id="miniroom-speech" aria-live="polite">함께해 주셔서 기쁩니다.</span>
               <div class="guest-minimi-stage" id="guest-minimi-stage" role="list" aria-label="초대된 하객 미니미"></div>
               <span class="miniroom-couple-label" aria-hidden="true">호진 &amp; 선영</span>
             </div>
-            <p class="miniroom-place">CHANGWON · THE GRADE · GARDEN PARTY</p>
+            <p class="miniroom-place">CHANGWON · 2027.03.06</p>
           </div>
 
           <div class="minimi-lounge">
             <div class="minimi-lounge-heading"><div><span class="section-eyebrow en">GUEST MINIMI</span><h3>미니미 초대석</h3></div><span class="minimi-count" id="minimi-count">0 / 36</span></div>
-            <p class="minimi-lounge-intro">마음에 드는 미니미를 골라 정원에 놓아주세요.</p>
+            <p class="minimi-lounge-intro">미니미를 골라 정원을 채워 주세요.</p>
             <div class="minimi-picker" role="group" aria-label="초대할 미니미 선택">
               <button class="minimi-choice is-selected" type="button" data-minimi-choice="1" aria-pressed="true" aria-label="별이 미니미 선택"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#minimi-guest-1"/></svg><span>별이</span></button>
               <button class="minimi-choice" type="button" data-minimi-choice="2" aria-pressed="false" aria-label="구름 미니미 선택"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#minimi-guest-2"/></svg><span>구름</span></button>
@@ -213,8 +203,8 @@
               <button class="minimi-choice" type="button" data-minimi-choice="5" aria-pressed="false" aria-label="리본 미니미 선택"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#minimi-guest-5"/></svg><span>리본</span></button>
               <button class="minimi-choice" type="button" data-minimi-choice="6" aria-pressed="false" aria-label="달님 미니미 선택"><svg viewBox="0 0 40 60" aria-hidden="true"><use href="#minimi-guest-6"/></svg><span>달님</span></button>
             </div>
-            <button class="btn minimi-add-button" id="add-minimi" type="button">선택한 미니미 초대하기</button>
-            <p class="minimi-save-note" id="minimi-save-note">하객 미니미 공유 저장소에 연결하고 있어요.</p>
+            <button class="btn minimi-add-button" id="add-minimi" type="button">정원에 놓기</button>
+            <p class="minimi-save-note" id="minimi-save-note" aria-live="polite"></p>
           </div>
         </div>
         <footer class="miniroom-footer"><span>2027 · HOJIN &amp; SUNYOUNG</span><a href="#guestbook">방명록에 축하 남기기 <b>→</b></a></footer>
@@ -266,14 +256,13 @@
         <a class="btn" href="https://map.kakao.com/link/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">카카오맵</a>
         <a class="btn" href="https://map.naver.com/p/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">네이버지도</a>
       </div>
-      <p class="venue-note">예식장 교통·주차 안내는 확인 후 추가할게요.</p>
     </section>
 
     <!-- 7. ACCOUNT -->
     <section class="section account reveal" id="account" aria-labelledby="account-heading">
       <p class="section-eyebrow en">WITH HEART</p>
       <h2 class="section-title" id="account-heading">마음 전하실 곳</h2>
-      <p class="account-message">참석이 어려우신 분들을 위해<br>마음 전하실 곳을 안내드립니다.<br><br>따뜻한 축하의 마음,<br>오래 간직하겠습니다.</p>
+      <p class="account-message">축하의 마음을 전하실 수 있도록<br>계좌 정보를 안내드립니다.</p>
       <details class="acc-group">
         <summary>신랑측 계좌 안내</summary><ul class="acc-list">
           <li><p class="acc-name">신랑 아버지 윤태환</p><p class="acc-num">국민은행 960101-01-267910</p><button type="button" class="copy-btn" data-copy="국민은행 960101-01-267910 윤태환" aria-label="윤태환 계좌번호 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
@@ -288,37 +277,20 @@
       </details>
     </section>
 
-    <!-- 8. RSVP -->
-    <section class="section rsvp reveal" id="rsvp" aria-labelledby="rsvp-heading">
-      <p class="section-eyebrow en">RSVP</p>
-      <h2 class="section-title" id="rsvp-heading">참석 의사 전달</h2>
-      <p class="rsvp-message">
-        참석 의사를 미리 전해 주시면<br>
-        더욱 정성껏 자리를 준비하겠습니다.<br><br>
-        소중한 시간 내어 주시는 모든 분들께<br>
-        미리 감사의 마음을 전합니다.
-      </p>
-      <!-- placeholder: RSVP_FORM_URL 외부 폼(Tally / Google Form / FormSubmit)으로 교체 필요 -->
-      <a class="btn primary" href="#" id="rsvp-link" target="_blank" rel="noopener" data-placeholder-url>마음 전하기</a>
-    </section>
-
     <!-- 9. GUESTBOOK -->
     <section class="section guestbook reveal" id="guestbook" aria-labelledby="guestbook-heading">
       <p class="section-eyebrow en">GUEST BOOK</p>
       <h2 class="section-title" id="guestbook-heading">방명록</h2>
-      <p class="guestbook-message">오늘 우리 미니홈피에 들러 주셔서 고마워요.<br>축하 한마디를 남겨 주세요.<br><br>오래도록 마음에 담아둘게요.</p>
+      <p class="guestbook-message">두 사람에게 전하고 싶은 축하의 말을 남겨 주세요.</p>
       <!-- placeholder: GUESTBOOK_FORM_URL 외부 폼으로 교체 필요 -->
-      <a class="btn" href="#" id="guestbook-link" target="_blank" rel="noopener" data-placeholder-url>마음 남기기</a>
+      <a class="btn" href="#" id="guestbook-link" target="_blank" rel="noopener" data-placeholder-url hidden>축하 메시지 남기기</a>
     </section>
 
     <!-- 10. SHARE -->
     <section class="section share reveal" id="share" aria-labelledby="share-heading">
       <p class="section-eyebrow en">SHARE</p>
       <h2 class="section-title" id="share-heading">청첩장 공유</h2>
-      <p class="share-message">
-        저희의 소식을<br>
-        가까운 분들께도 함께 전해 주세요.
-      </p>
+      <p class="share-message">소중한 분들과 이 소식을 나누어 주세요.</p>
       <div class="share-actions">
         <button type="button" class="btn primary" id="share-kakao" aria-label="카카오톡으로 공유하기">카카오톡으로 공유하기</button>
         <button type="button" class="btn" id="share-link" aria-label="청첩장 링크 복사하기">링크 복사하기</button>
@@ -326,7 +298,7 @@
     </section>
 
     <footer class="card-footer">
-      <p class="script">Thank you</p>
+      <p class="script">감사합니다</p>
       <p class="footer-line">2027 . 03 . 06</p>
       <p class="footer-line en">호진 &amp; 선영</p>
     </footer>
@@ -349,3 +321,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
