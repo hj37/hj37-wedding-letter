@@ -10,10 +10,9 @@
   // PLACEHOLDERS — 실제 운영 시 아래 값을 채워주세요.
   // ---------------------------------------------------------
   const KAKAO_JS_KEY     = '0a9b30e3ac311ebc75af75fb3290f2cd'; // 카카오 JavaScript 키
-  const GUESTBOOK_URL    = ''; // placeholder: 외부 방명록 폼 URL
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
   const BGM_SRC          = ''; // placeholder: 사용 허가된 음원 파일 경로 (예: 'audio/bgm.mp3')
-  // Supabase publishable/anon key is designed for browser use; RLS limits the table to public minimi IDs.
+  // Public anon key: the database limits the shared guestbook to reading and adding messages.
   const SUPABASE_URL      = 'https://lcukpufzpijhwqdpejyx.supabase.co';
   const SUPABASE_KEY      = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjdWtwdWZ6cGlqaHdxZHBlanl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3NTE4MjAsImV4cCI6MjA3NzMyNzgyMH0.s1qRdFzgS8SPBYcA419eEwrBV6fXslHxoaZIrYZNovg';
   const SHARE_TITLE      = '윤호진 ♡ 박선영 결혼합니다';
@@ -558,87 +557,305 @@
   }
 
   // ---------------------------------------------------------
-  // Miniroom: shared guest minimi board
-  // ---------------------------------------------------------
-  function setupMiniroom() {
-    const picker = $('.minimi-picker');
-    const stage = $('#guest-minimi-stage');
-    const addButton = $('#add-minimi');
-    const count = $('#minimi-count');
-    const note = $('#minimi-save-note');
-    const speech = $('#miniroom-speech');
-    if (!picker || !stage || !addButton || !count || !note) return;
+  // Shared guestbook board (public read + add; database RLS enforces field limits).
+  function setupGuestbook() {
+    const list = $('#guestbook-list');
+    const form = $('#guestbook-form');
+    const status = $('#guestbook-status');
+    const message = $('#guestbook-message-input');
+    const counter = $('#guestbook-char-count');
+    const submit = $('#guestbook-submit');
+    const count = $('#guestbook-entry-count');
+    if (!list || !form || !status || !message || !submit) return;
 
-    let selected = 1;
-    let entries = [];
-    addButton.disabled = true;
-    const render = () => {
-      stage.replaceChildren();
-      entries.forEach((entry, index) => {
-        const minimiId = Math.min(6, Math.max(1, Number(entry.minimi_id) || 1));
-        const avatar = document.createElement('img');
-        avatar.src = `images/minimi-${minimiId}.svg`;
-        avatar.alt = `하객 미니미 ${index + 1}`;
-        avatar.setAttribute('class', 'guest-minimi-avatar');
-        avatar.setAttribute('role', 'listitem');
-        avatar.draggable = false;
-        avatar.style.left = `${8 + ((index * 13) % 84)}%`;
-        avatar.style.animationDelay = `${(index % 5) * 80}ms`;
-        stage.append(avatar);
-      });
-      count.textContent = `${entries.length}${entries.length >= 36 ? '+' : ''} / 36`;
-      addButton.disabled = entries.length >= 36;
-    };
-    const request = async (method, body) => {
-      if (!SUPABASE_KEY) throw new Error('미니미 기능을 이용할 수 없습니다.');
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/wedding_guest_minimis${method === 'GET' ? '?select=minimi_id,created_at&order=created_at.asc&limit=36' : ''}`, {
-        method,
-        headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        ...(body ? { body: JSON.stringify(body) } : {})
-      });
-      if (!response.ok) throw new Error('미니미를 저장하지 못했어요. 잠시 후 다시 시도해 주세요.');
-      return method === 'GET' ? response.json() : undefined;
-    };
-    const load = async () => {
-      try {
-        entries = await request('GET');
-        render();
-        note.textContent = '미니미가 정원에 모였어요.';
-      } catch (error) {
-        note.textContent = '미니미를 불러오지 못했어요.';
-        addButton.disabled = false;
+    const endpoint = SUPABASE_URL + '/rest/v1/wedding_guestbook';
+    const headers = { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY };
+    const updateCount = () => { if (counter) counter.textContent = message.value.length + ' / 300'; };
+    message.addEventListener('input', updateCount);
+
+    function render(entries) {
+      list.replaceChildren();
+      if (count) count.textContent = entries.length + '개';
+      if (!entries.length) {
+        const empty = document.createElement('li');
+        empty.className = 'guestbook-empty';
+        empty.textContent = '첫 번째 축하 메시지를 남겨주세요.';
+        list.append(empty);
+        return;
       }
-    };
-
-    picker.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-minimi-choice]');
-      if (!button) return;
-      selected = Number(button.dataset.minimiChoice);
-      $$('[data-minimi-choice]', picker).forEach((choice) => {
-        const active = choice === button;
-        choice.classList.toggle('is-selected', active);
-        choice.setAttribute('aria-pressed', String(active));
+      entries.forEach((entry) => {
+        const item = document.createElement('li');
+        item.className = 'guestbook-entry';
+        const head = document.createElement('div');
+        head.className = 'guestbook-entry-head';
+        const name = document.createElement('strong');
+        name.textContent = entry.guest_name || '익명의 하객';
+        const time = document.createElement('time');
+        const date = new Date(entry.created_at);
+        time.dateTime = date.toISOString();
+        time.textContent = new Intl.DateTimeFormat('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }).format(date);
+        const text = document.createElement('p');
+        text.className = 'guestbook-entry-message';
+        text.textContent = entry.message;
+        head.append(name, time);
+        item.append(head, text);
+        list.append(item);
       });
-      haptic(8);
-    });
-    addButton.addEventListener('click', async () => {
-      addButton.disabled = true;
+    }
+
+    async function loadEntries() {
       try {
-        await request('POST', { minimi_id: selected });
-        await load();
-        speech.textContent = '정원에서 만나요!';
-        haptic(12);
+        const response = await fetch(endpoint + '?select=id,guest_name,message,created_at&order=created_at.desc&limit=50', { headers });
+        if (!response.ok) throw new Error('load');
+        render(await response.json());
+        if (!status.dataset.posted) status.textContent = '';
       } catch (error) {
-        showToast(error.message || '미니미를 저장하지 못했어요.');
+        if (count) count.textContent = '';
+        list.replaceChildren();
+        const unavailable = document.createElement('li');
+        unavailable.className = 'guestbook-empty';
+        unavailable.textContent = '방명록을 불러오지 못했어요. 잠시 후 다시 확인해 주세요.';
+        list.append(unavailable);
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const guestName = (form.elements.guest_name.value || '').trim() || '익명의 하객';
+      const guestMessage = message.value.trim();
+      if (!guestMessage) { status.textContent = '축하 메시지를 입력해 주세요.'; return; }
+      if (guestName.length > 24 || guestMessage.length > 300) { status.textContent = '이름은 24자, 메시지는 300자까지 입력할 수 있어요.'; return; }
+      submit.disabled = true;
+      status.textContent = '메시지를 남기고 있어요.';
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: Object.assign({}, headers, { 'Content-Type': 'application/json', Prefer: 'return=minimal' }),
+          body: JSON.stringify({ guest_name: guestName, message: guestMessage })
+        });
+        if (!response.ok) throw new Error('post');
+        form.reset();
+        updateCount();
+        status.dataset.posted = 'true';
+        status.textContent = '축하 메시지를 남겼어요.';
+        await loadEntries();
+        status.dataset.posted = 'true';
+        status.textContent = '축하 메시지를 남겼어요.';
+      } catch (error) {
+        status.textContent = '메시지를 저장하지 못했어요. 잠시 후 다시 시도해 주세요.';
       } finally {
-        addButton.disabled = entries.length >= 36;
+        submit.disabled = false;
       }
     });
-    load();
-    window.setInterval(load, 30000);
+    loadEntries();
   }
 
-  // ---------------------------------------------------------
+  // A compact 3-match game. A solved board always reveals a 95–100 luck score.
+  function setupLuckyPuzzle() {
+    const boardEl = $('#match-board');
+    const movesEl = $('#match-moves');
+    const combosEl = $('#match-combos');
+    const status = $('#match-status');
+    const restart = $('#match-restart');
+    const result = $('#fortune-result');
+    const scoreEl = $('#fortune-score');
+    const readingEl = $('#fortune-reading');
+    if (!boardEl || !movesEl || !combosEl || !status || !restart || !result) return;
+
+    const size = 6;
+    const moveLimit = 12;
+    const goal = 3;
+    const tiles = [
+      { icon: '💍', name: '반지' },
+      { icon: '🤍', name: '하트' },
+      { icon: '✨', name: '별빛' },
+      { icon: '🍀', name: '클로버' },
+      { icon: '🎀', name: '리본' }
+    ];
+    const readings = [
+      '세 가지 마음이 한 줄로 모인 흐름처럼, 화합의 기운이 기쁜 인연을 부릅니다.',
+      '축복을 나누고 모은 기운이 길합니다. 반가운 소식과 웃음이 오래 이어집니다.',
+      '서로를 향한 따뜻한 마음이 복을 부르는 날, 좋은 인연이 곁에 머뭅니다.',
+      '정성껏 모은 세 번의 조합처럼, 작은 기쁨이 큰 행운으로 이어집니다.',
+      '오늘은 화목의 기운이 맑습니다. 나눈 축복이 좋은 소식으로 돌아옵니다.',
+      '마음이 같은 방향을 향하는 날입니다. 기쁜 만남과 평안한 기운이 함께합니다.'
+    ];
+    let cells = [];
+    let selected = -1;
+    let moves = moveLimit;
+    let combos = 0;
+    let busy = false;
+    let finished = false;
+
+    function findGroups(source) {
+      const groups = [];
+      for (let r = 0; r < size; r++) {
+        let c = 0;
+        while (c < size) {
+          const start = c;
+          const val = source[r * size + c];
+          while (c < size && val !== null && source[r * size + c] === val) c++;
+          if (val !== null && c - start >= 3) groups.push(Array.from({ length: c - start }, (_, n) => r * size + start + n));
+          if (c === start) c++;
+        }
+      }
+      for (let c = 0; c < size; c++) {
+        let r = 0;
+        while (r < size) {
+          const start = r;
+          const val = source[r * size + c];
+          while (r < size && val !== null && source[r * size + c] === val) r++;
+          if (val !== null && r - start >= 3) groups.push(Array.from({ length: r - start }, (_, n) => (start + n) * size + c));
+          if (r === start) r++;
+        }
+      }
+      return groups;
+    }
+
+    function hasMove(source) {
+      for (let i = 0; i < source.length; i++) {
+        const row = Math.floor(i / size), col = i % size;
+        const neighbors = [];
+        if (col < size - 1) neighbors.push(i + 1);
+        if (row < size - 1) neighbors.push(i + size);
+        for (const j of neighbors) {
+          [source[i], source[j]] = [source[j], source[i]];
+          const found = findGroups(source).length > 0;
+          [source[i], source[j]] = [source[j], source[i]];
+          if (found) return true;
+        }
+      }
+      return false;
+    }
+
+    function newBoard() {
+      let source = [];
+      let attempts = 0;
+      do {
+        source = Array(size * size).fill(null);
+        for (let r = 0; r < size; r++) {
+          for (let c = 0; c < size; c++) {
+            const choices = tiles.map((_, i) => i).filter((v) =>
+              !(c >= 2 && source[r * size + c - 1] === v && source[r * size + c - 2] === v) &&
+              !(r >= 2 && source[(r - 1) * size + c] === v && source[(r - 2) * size + c] === v)
+            );
+            source[r * size + c] = choices[Math.floor(Math.random() * choices.length)];
+          }
+        }
+        attempts++;
+      } while (!hasMove(source) && attempts < 100);
+      return source;
+    }
+
+    function draw() {
+      boardEl.replaceChildren();
+      cells.forEach((tile, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'match-tile' + (index === selected ? ' is-selected' : '');
+        button.dataset.tile = String(index);
+        button.textContent = tiles[tile].icon;
+        button.setAttribute('aria-label', tiles[tile].name + ' 타일');
+        button.setAttribute('aria-pressed', String(index === selected));
+        button.disabled = busy || finished;
+        boardEl.append(button);
+      });
+      movesEl.textContent = String(moves);
+      combosEl.textContent = String(combos);
+    }
+
+    function fallAndRefill(removed) {
+      const gone = new Set(removed);
+      for (let c = 0; c < size; c++) {
+        const remaining = [];
+        for (let r = size - 1; r >= 0; r--) {
+          const index = r * size + c;
+          if (!gone.has(index)) remaining.push(cells[index]);
+        }
+        for (let r = size - 1; r >= 0; r--) {
+          cells[r * size + c] = remaining[size - 1 - r];
+          if (cells[r * size + c] === undefined) cells[r * size + c] = Math.floor(Math.random() * tiles.length);
+        }
+      }
+    }
+
+    function win() {
+      finished = true;
+      const score = 95 + Math.floor(Math.random() * 6);
+      scoreEl.textContent = score + '점';
+      readingEl.textContent = readings[score - 95];
+      result.hidden = false;
+      status.textContent = '퍼즐을 풀었어요. 오늘의 행운을 확인해보세요.';
+      draw();
+      result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    async function resolve(groups) {
+      busy = true;
+      while (groups.length) {
+        combos += groups.length;
+        const removed = groups.flat();
+        const unique = Array.from(new Set(removed));
+        draw();
+        await new Promise((done) => setTimeout(done, 230));
+        if (combos >= goal) { win(); return; }
+        fallAndRefill(unique);
+        draw();
+        await new Promise((done) => setTimeout(done, 140));
+        groups = findGroups(cells);
+      }
+      busy = false;
+      draw();
+      if (moves <= 0) status.textContent = '이번 판은 여기까지예요. 다시 섞어서 도전해보세요.';
+      else status.textContent = '좋아요! 같은 타일 3개를 더 맞춰주세요.';
+    }
+
+    function adjacent(a, b) {
+      const ar = Math.floor(a / size), ac = a % size;
+      const br = Math.floor(b / size), bc = b % size;
+      return Math.abs(ar - br) + Math.abs(ac - bc) === 1;
+    }
+
+    boardEl.addEventListener('click', async (event) => {
+      const tile = event.target.closest('[data-tile]');
+      if (!tile || busy || finished || moves <= 0) return;
+      const index = Number(tile.dataset.tile);
+      if (selected < 0) { selected = index; draw(); return; }
+      if (selected === index) { selected = -1; draw(); return; }
+      if (!adjacent(selected, index)) { selected = index; draw(); return; }
+      [cells[selected], cells[index]] = [cells[index], cells[selected]];
+      const groups = findGroups(cells);
+      if (!groups.length) {
+        [cells[selected], cells[index]] = [cells[index], cells[selected]];
+        selected = -1;
+        status.textContent = '그 자리에서는 조합이 안 돼요. 다시 골라보세요.';
+        draw();
+        return;
+      }
+      moves--;
+      selected = -1;
+      status.textContent = '조합을 찾았어요!';
+      await resolve(groups);
+      if (!finished && moves <= 0) status.textContent = '이번 판은 여기까지예요. 다시 섞어서 도전해보세요.';
+    });
+
+    restart.addEventListener('click', () => {
+      cells = newBoard();
+      selected = -1;
+      moves = moveLimit;
+      combos = 0;
+      busy = false;
+      finished = false;
+      result.hidden = true;
+      scoreEl.textContent = '';
+      readingEl.textContent = '';
+      status.textContent = '이웃한 타일 두 개를 차례로 눌러 바꿔보세요.';
+      draw();
+    });
+    cells = newBoard();
+    draw();
+  }
+
   // 10. Share (Kakao / link copy) (motion §3-7)
   // ---------------------------------------------------------
   function setupShare() {
@@ -765,33 +982,19 @@
   }
 
   // ---------------------------------------------------------
-  // 11. RSVP / Guestbook placeholder URL handling
-  // ---------------------------------------------------------
+  // Optional external MYBOX upload link.
   function setupExternalLinks() {
-    const gb   = $('#guestbook-link');
     const mybox = $('#mybox-upload');
-    if (mybox) {
-      if (MYBOX_UPLOAD_URL) {
-        mybox.href = MYBOX_UPLOAD_URL;
-        mybox.target = '_blank';
-        mybox.rel = 'noopener';
-        mybox.hidden = false;
-        mybox.removeAttribute('data-placeholder-url');
-        mybox.textContent = '하객 사진 더하기';
-      }
-    }
-    if (gb) {
-      if (GUESTBOOK_URL) {
-        gb.href = GUESTBOOK_URL;
-        gb.hidden = false;
-        gb.target = '_blank';
-        gb.rel = 'noopener';
-        gb.removeAttribute('data-placeholder-url');
-      }
+    if (mybox && MYBOX_UPLOAD_URL) {
+      mybox.href = MYBOX_UPLOAD_URL;
+      mybox.target = '_blank';
+      mybox.rel = 'noopener';
+      mybox.hidden = false;
+      mybox.removeAttribute('data-placeholder-url');
+      mybox.textContent = '하객 사진 더하기';
     }
   }
 
-  // ---------------------------------------------------------
   // INIT
   // ---------------------------------------------------------
   function init() {
@@ -803,7 +1006,8 @@
     setupLightbox();
     setupCopy();
     setupMusic();
-    setupMiniroom();
+    setupGuestbook();
+    setupLuckyPuzzle();
     setupShare();
     setupVenueDirections();
     setupKakaoMap();

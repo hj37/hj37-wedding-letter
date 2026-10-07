@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=gallery-color-20261007">
+  <link rel="stylesheet" href="style.css?v=guestbook-puzzle-20261007">
 </head>
 <body>
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
@@ -214,10 +214,23 @@
     <!-- 9. GUESTBOOK -->
     <section class="section guestbook reveal" id="guestbook" aria-labelledby="guestbook-heading">
       <p class="section-eyebrow en">GUEST BOOK</p>
-      <h2 class="section-title" id="guestbook-heading">방명록</h2>
-      <p class="guestbook-message">두 사람에게 전하는 축하의 마음</p>
-      <!-- placeholder: GUESTBOOK_FORM_URL 외부 폼으로 교체 필요 -->
-      <a class="btn" href="#" id="guestbook-link" target="_blank" rel="noopener" data-placeholder-url hidden>축하 메시지 남기기</a>
+      <h2 class="section-title" id="guestbook-heading">축하의 마음을 남겨주세요</h2>
+      <p class="guestbook-message">남겨주신 글은 두 사람과 모든 하객이 함께 볼 수 있습니다.</p>
+      <div class="guestbook-board">
+        <form class="guestbook-form" id="guestbook-form">
+          <label for="guestbook-name">이름 <span>선택</span></label>
+          <input id="guestbook-name" name="guest_name" type="text" maxlength="24" autocomplete="name" placeholder="익명으로 남겨도 좋아요">
+          <label for="guestbook-message-input">축하 메시지</label>
+          <textarea id="guestbook-message-input" name="message" rows="4" maxlength="300" required placeholder="두 사람에게 따뜻한 축하를 전해주세요"></textarea>
+          <div class="guestbook-form-foot">
+            <span id="guestbook-char-count">0 / 300</span>
+            <button class="btn primary" id="guestbook-submit" type="submit">메시지 남기기</button>
+          </div>
+          <p class="guestbook-status" id="guestbook-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="guestbook-board-head"><h3>축하 메시지</h3><span id="guestbook-entry-count">불러오는 중</span></div>
+        <ol class="guestbook-list" id="guestbook-list" aria-live="polite"></ol>
+      </div>
     </section>
 
     <!-- 10. SHARE -->
@@ -231,68 +244,23 @@
       </div>
     </section>
 
-    <!-- A tiny outdoor wedding garden, with a separate guest minimi picker -->
-    <section class="section miniroom-section reveal" id="miniroom" aria-labelledby="miniroom-heading">
-      <p class="section-eyebrow en">OUR GARDEN WEDDING</p>
-      <h2 class="section-title" id="miniroom-heading">미니미로 채우는 작은 정원</h2>
-      <p class="miniroom-intro">미니미로 두 사람의 정원에 함께해 주세요.</p>
-
-      <div class="miniroom-shell">
-        <header class="miniroom-topbar">
-          <div class="miniroom-brand"><span class="miniroom-dotori" aria-hidden="true">♥</span><span>호진♥선영 <b>GARDEN DAY</b></span></div>
-          <p class="miniroom-url">창원 · 2027.03.06</p>
-        </header>
-        <nav class="miniroom-tabs" aria-label="미니홈피 메뉴">
-          <a href="#hero">홈</a><a href="#gallery">사진첩</a><a href="#guestbook" class="is-current">방명록</a>
-        </nav>
-        <div class="miniroom-layout">
-          <div class="miniroom-main">
-            <div class="miniroom-scene" role="group" aria-label="야외 예식장 픽셀 아트 미니룸">
-              <svg class="miniroom-art" viewBox="0 0 480 300" role="presentation" aria-hidden="true" shape-rendering="crispEdges">
-                <rect width="480" height="205" fill="#eceeec"/><rect y="205" width="480" height="95" fill="#d7dad5"/>
-                <rect x="0" y="184" width="480" height="22" fill="#e2e4df"/><rect x="0" y="201" width="480" height="6" fill="#c7cac5"/>
-                <circle cx="388" cy="53" r="23" fill="#f9f8f5"/><rect x="58" y="53" width="54" height="6" fill="#f8f8f5"/><rect x="45" y="59" width="77" height="5" fill="#f8f8f5"/>
-                <rect x="18" y="106" width="30" height="76" fill="#aeb5ac"/><rect x="22" y="87" width="22" height="30" fill="#aeb5ac"/><rect x="22" y="78" width="22" height="15" fill="#bbc1b8"/><rect x="22" y="133" width="30" height="49" fill="#8f998f"/>
-                <rect x="431" y="95" width="31" height="87" fill="#abb2a9"/><rect x="435" y="76" width="22" height="34" fill="#abb2a9"/><rect x="435" y="68" width="22" height="15" fill="#b9c0b6"/><rect x="431" y="132" width="31" height="50" fill="#8d968d"/>
-                <path d="M166 218V109a74 74 0 0 1 148 0v109" fill="none" stroke="#f9f8f5" stroke-width="11"/><path d="M176 218V111a64 64 0 0 1 128 0v107" fill="none" stroke="#c9c9c5" stroke-width="3"/>
-                <rect x="158" y="209" width="10" height="17" fill="#bdbdb8"/><rect x="312" y="209" width="10" height="17" fill="#bdbdb8"/>
-                <rect x="174" y="88" width="12" height="8" fill="#aab2a4"/><rect x="184" y="81" width="10" height="8" fill="#c0b8ae"/><rect x="291" y="91" width="12" height="8" fill="#aab2a4"/><rect x="280" y="83" width="10" height="8" fill="#c0b8ae"/>
-                <path d="M216 206L228 206L196 300H284L252 206H264Z" fill="#f3f2ee"/><rect x="174" y="220" width="132" height="6" fill="#c1c2bd"/>
-                <rect x="77" y="173" width="33" height="24" fill="#f4f3ef"/><rect x="71" y="169" width="45" height="5" fill="#aeb0ab"/><rect x="370" y="173" width="33" height="24" fill="#f4f3ef"/><rect x="364" y="169" width="45" height="5" fill="#aeb0ab"/>
-                <rect x="77" y="197" width="4" height="15" fill="#a7aaa4"/><rect x="106" y="197" width="4" height="15" fill="#a7aaa4"/><rect x="370" y="197" width="4" height="15" fill="#a7aaa4"/><rect x="399" y="197" width="4" height="15" fill="#a7aaa4"/>
-                <rect x="119" y="176" width="28" height="21" fill="#f4f3ef"/><rect x="115" y="172" width="36" height="5" fill="#aeb0ab"/><rect x="333" y="176" width="28" height="21" fill="#f4f3ef"/><rect x="329" y="172" width="36" height="5" fill="#aeb0ab"/>
-                <rect x="119" y="197" width="4" height="14" fill="#a7aaa4"/><rect x="143" y="197" width="4" height="14" fill="#a7aaa4"/><rect x="333" y="197" width="4" height="14" fill="#a7aaa4"/><rect x="357" y="197" width="4" height="14" fill="#a7aaa4"/>
-                <rect x="36" y="212" width="10" height="27" fill="#969f91"/><rect x="28" y="200" width="26" height="17" fill="#a8b29f"/><rect x="33" y="191" width="17" height="14" fill="#bac2b4"/><rect x="431" y="212" width="10" height="27" fill="#969f91"/><rect x="422" y="200" width="27" height="17" fill="#a8b29f"/><rect x="427" y="191" width="17" height="14" fill="#bac2b4"/>
-                <ellipse cx="210" cy="198" rx="17" ry="3" fill="#55584f" opacity=".16"/><ellipse cx="258" cy="198" rx="18" ry="3" fill="#55584f" opacity=".16"/>
-                <image href="images/couple-groom.svg" x="188" y="141" width="44" height="57" preserveAspectRatio="xMidYMax meet"/>
-                <image href="images/couple-bride.svg" x="236" y="141" width="44" height="57" preserveAspectRatio="xMidYMax meet"/>
-                <rect x="195" y="199" width="34" height="1" fill="#aeb0ab"/><rect x="235" y="199" width="34" height="1" fill="#aeb0ab"/>
-                <rect x="15" y="271" width="450" height="3" fill="#c7cac5"/>
-              </svg>
-              <span class="miniroom-speech" id="miniroom-speech" aria-live="polite">함께해 주셔서 기쁩니다.</span>
-              <div class="guest-minimi-stage" id="guest-minimi-stage" role="list" aria-label="초대된 하객 미니미"></div>
-              <span class="miniroom-couple-label" aria-hidden="true">호진 &amp; 선영</span>
-            </div>
-            <p class="miniroom-place">CHANGWON · 2027.03.06</p>
-          </div>
-
-          <div class="minimi-lounge">
-            <div class="minimi-lounge-heading"><div><span class="section-eyebrow en">GUEST MINIMI</span><h3>미니미 초대석</h3></div><span class="minimi-count" id="minimi-count">0 / 36</span></div>
-            <p class="minimi-lounge-intro">미니미를 골라 정원을 채워 주세요.</p>
-            <div class="minimi-picker" role="group" aria-label="초대할 미니미 선택">
-              <button class="minimi-choice is-selected" type="button" data-minimi-choice="1" aria-pressed="true" aria-label="별이 미니미 선택"><img src="images/minimi-1.svg" alt="" aria-hidden="true"><span>별이</span></button>
-              <button class="minimi-choice" type="button" data-minimi-choice="2" aria-pressed="false" aria-label="구름 미니미 선택"><img src="images/minimi-2.svg" alt="" aria-hidden="true"><span>구름</span></button>
-              <button class="minimi-choice" type="button" data-minimi-choice="3" aria-pressed="false" aria-label="햇살 미니미 선택"><img src="images/minimi-3.svg" alt="" aria-hidden="true"><span>햇살</span></button>
-              <button class="minimi-choice" type="button" data-minimi-choice="4" aria-pressed="false" aria-label="새싹 미니미 선택"><img src="images/minimi-4.svg" alt="" aria-hidden="true"><span>새싹</span></button>
-              <button class="minimi-choice" type="button" data-minimi-choice="5" aria-pressed="false" aria-label="리본 미니미 선택"><img src="images/minimi-5.svg" alt="" aria-hidden="true"><span>리본</span></button>
-              <button class="minimi-choice" type="button" data-minimi-choice="6" aria-pressed="false" aria-label="달님 미니미 선택"><img src="images/minimi-6.svg" alt="" aria-hidden="true"><span>달님</span></button>
-            </div>
-            <button class="btn minimi-add-button" id="add-minimi" type="button">정원에 놓기</button>
-            <p class="minimi-save-note" id="minimi-save-note" aria-live="polite"></p>
-          </div>
-        </div>
-        <footer class="miniroom-footer"><span>2027 · HOJIN &amp; SUNYOUNG</span><a href="#guestbook">방명록에 축하 남기기 <b>→</b></a></footer>
+    <section class="section lucky-game reveal" id="lucky-puzzle" aria-labelledby="lucky-puzzle-heading">
+      <p class="section-eyebrow en">LUCKY MATCH</p>
+      <h2 class="section-title" id="lucky-puzzle-heading">행운을 맞춰보세요</h2>
+      <p class="lucky-game-intro">이웃한 타일을 바꿔 같은 모양 3개를 맞춰주세요.<br>조합을 세 번 만들면 오늘의 행운이 열립니다.</p>
+      <div class="match-game-meta" aria-live="polite">
+        <span>남은 움직임 <b id="match-moves">12</b></span>
+        <span>모은 조합 <b id="match-combos">0</b> / 3</span>
       </div>
+      <div class="match-board" id="match-board" role="group" aria-label="3매치 행운 퍼즐판"></div>
+      <p class="match-status" id="match-status" role="status" aria-live="polite">이웃한 타일 두 개를 차례로 눌러 바꿔보세요.</p>
+      <button class="btn match-restart" id="match-restart" type="button">다시 섞기</button>
+      <article class="fortune-result" id="fortune-result" aria-live="polite" hidden>
+        <p class="section-eyebrow en">YOUR LUCK TODAY</p>
+        <h3>오늘의 행운점수</h3>
+        <p class="fortune-score" id="fortune-score"></p>
+        <p class="fortune-reading" id="fortune-reading"></p>
+      </article>
     </section>
 
     <footer class="card-footer">
@@ -316,7 +284,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js"></script>
+  <script src="script.js?v=guestbook-puzzle-20261007"></script>
 </body>
 </html>
 

@@ -1582,3 +1582,59 @@ a { color: var(--color-accent); }
   object-position: center;
   background: #efefed;
 }
+
+
+/* Shared guestbook */
+.guestbook { background: #f7f5f1; border: 0; border-radius: 18px; }
+.guestbook-message { margin: -12px auto 28px; color: var(--color-muted); font-size: 14px; }
+.guestbook-board { max-width: 410px; margin: 0 auto; text-align: left; }
+.guestbook-form { display: grid; gap: 10px; padding: 18px; border: 1px solid #e4dfd7; border-radius: 14px; background: #fff; }
+.guestbook-form label { margin-top: 4px; color: var(--color-text); font-size: 13px; font-weight: 700; }
+.guestbook-form label span { color: var(--color-muted); font-size: 11px; font-weight: 400; }
+.guestbook-form input, .guestbook-form textarea {
+  width: 100%; padding: 12px 13px; border: 1px solid #dedbd4; border-radius: 9px;
+  background: #fff; color: var(--color-text); font: 14px/1.6 var(--font-ko-sans);
+}
+.guestbook-form textarea { min-height: 100px; resize: vertical; }
+.guestbook-form input:focus, .guestbook-form textarea:focus { outline: 2px solid #b8a28c; outline-offset: 1px; }
+.guestbook-form-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.guestbook-form-foot span { color: var(--color-muted); font: 12px var(--font-ko-sans); }
+.guestbook-form-foot .btn { min-height: 42px; padding-inline: 16px; }
+.guestbook-status { min-height: 1.5em; color: var(--color-muted); font: 12px/1.5 var(--font-ko-sans); }
+.guestbook-board-head { display: flex; align-items: baseline; justify-content: space-between; margin: 26px 2px 12px; }
+.guestbook-board-head h3 { font-size: 16px; }
+.guestbook-board-head span { color: var(--color-muted); font: 12px var(--font-ko-sans); }
+.guestbook-list { display: grid; gap: 10px; padding: 0; list-style: none; }
+.guestbook-entry, .guestbook-empty { padding: 15px 16px; border: 1px solid #e7e2db; border-radius: 12px; background: #fff; }
+.guestbook-entry-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.guestbook-entry-head strong { color: var(--color-text); font: 600 13px var(--font-ko-sans); }
+.guestbook-entry-head time { color: var(--color-muted); font: 11px var(--font-ko-sans); white-space: nowrap; }
+.guestbook-entry-message { margin-top: 8px; color: var(--color-text); font: 14px/1.75 var(--font-ko-sans); white-space: pre-wrap; overflow-wrap: anywhere; }
+.guestbook-empty { color: var(--color-muted); text-align: center; font: 13px/1.7 var(--font-ko-sans); }
+
+/* Three-match luck puzzle */
+.lucky-game { background: #f3f1ed; }
+.lucky-game-intro { margin: -12px auto 22px; color: var(--color-muted); font-size: 14px; }
+.match-game-meta { display: flex; justify-content: space-between; max-width: 360px; margin: 0 auto 12px; color: var(--color-muted); font: 12px var(--font-ko-sans); }
+.match-game-meta b { color: var(--color-text); font-size: 14px; }
+.match-board { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; width: 100%; max-width: 360px; margin: 0 auto; padding: 10px; border: 1px solid #e3ded6; border-radius: 16px; background: #eae6df; }
+.match-tile { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border: 1px solid #e1ddd6; border-radius: 11px; background: #fff; font-size: clamp(20px, 6vw, 29px); line-height: 1; box-shadow: 0 2px 5px #27221a0c; transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, opacity 150ms ease; }
+.match-tile.is-selected { transform: scale(.91); border: 2px solid #8b735c; background: #f6eee4; box-shadow: 0 0 0 3px #8b735c24; }
+.match-tile:disabled { cursor: default; }
+.match-status { min-height: 2.8em; margin: 12px auto 6px; color: var(--color-muted); font: 13px/1.6 var(--font-ko-sans); }
+.match-restart { margin: 0 auto; min-height: 42px; }
+.fortune-result { max-width: 360px; margin: 28px auto 0; padding: 24px 18px; border: 1px solid #ded5c8; border-radius: 16px; background: #fff; animation: fortuneReveal 500ms ease both; }
+.fortune-result[hidden] { display: none; }
+.fortune-result .section-eyebrow { margin-bottom: 6px; }
+.fortune-result h3 { color: var(--color-text); font-size: 16px; }
+.fortune-score { margin: 4px 0 12px; color: #8b735c; font: 600 42px/1.2 var(--font-en-serif); }
+.fortune-reading { color: var(--color-text); font-size: 14px; line-height: 1.8; word-break: keep-all; }
+@keyframes fortuneReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 360px) {
+  .guestbook-form { padding: 14px; }
+  .match-board { gap: 5px; padding: 7px; }
+  .match-tile { border-radius: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .match-tile, .fortune-result { transition: none; animation: none; }
+}
