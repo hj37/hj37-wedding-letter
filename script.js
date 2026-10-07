@@ -701,6 +701,83 @@
   }
 
   // ---------------------------------------------------------
+  // Venue directions: accessible transport tabs + Kakao Map
+  // ---------------------------------------------------------
+  function setupVenueDirections() {
+    const tabs = $$('[data-route-tab]');
+    const panels = $$('[data-route-panel]');
+    if (!tabs.length || !panels.length) return;
+
+    function selectTab(tab, moveFocus = false) {
+      const route = tab.dataset.routeTab;
+      tabs.forEach((item) => {
+        const active = item === tab;
+        item.setAttribute('aria-selected', String(active));
+        item.tabIndex = active ? 0 : -1;
+      });
+      panels.forEach((panel) => { panel.hidden = panel.dataset.routePanel !== route; });
+      if (moveFocus) tab.focus();
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', (event) => {
+        let next = index;
+        if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        selectTab(tabs[next], true);
+      });
+    });
+  }
+
+  function setupKakaoMap() {
+    const mapElement = $('#map');
+    const fallback = $('#map-fallback');
+    if (!mapElement || !fallback || !KAKAO_JS_KEY) return;
+
+    const script = document.createElement('script');
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${encodeURIComponent(KAKAO_JS_KEY)}&autoload=false&libraries=services`;
+    script.async = true;
+    script.onload = () => {
+      if (!window.kakao?.maps) return;
+      window.kakao.maps.load(() => {
+        const maps = window.kakao.maps;
+        const showMap = (lat, lng, placeName) => {
+          const position = new maps.LatLng(lat, lng);
+          const map = new maps.Map(mapElement, {
+            center: position,
+            level: 3,
+            draggable: true,
+            scrollwheel: false
+          });
+          const marker = new maps.Marker({ map, position });
+          const info = new maps.InfoWindow({
+            content: `<div class="kakao-map-label">${placeName}</div>`,
+            removable: false
+          });
+          info.open(map, marker);
+          fallback.hidden = true;
+          mapElement.classList.add('is-ready');
+        };
+
+        const geocoder = new maps.services.Geocoder();
+        geocoder.addressSearch('경상남도 창원시 성산구 원이대로 362', (result, status) => {
+          if (status === maps.services.Status.OK && result[0]) {
+            showMap(Number(result[0].y), Number(result[0].x), '세코 더 그레이드 웨딩홀');
+          }
+        });
+      });
+    };
+    // SDK/key/domain 오류 시 정적 위치와 카카오맵 링크를 계속 보여줍니다.
+    script.onerror = () => {};
+    document.head.appendChild(script);
+  }
+
+  // ---------------------------------------------------------
   // 11. RSVP / Guestbook placeholder URL handling
   // ---------------------------------------------------------
   function setupExternalLinks() {
@@ -741,6 +818,8 @@
     setupMusic();
     setupMiniroom();
     setupShare();
+    setupVenueDirections();
+    setupKakaoMap();
     setupExternalLinks();
 
     // reduced-motion 변경 시 단순 reload (모션 일관성 보장)
