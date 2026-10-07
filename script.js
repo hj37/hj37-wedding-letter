@@ -9,7 +9,7 @@
   // ---------------------------------------------------------
   // PLACEHOLDERS — 실제 운영 시 아래 값을 채워주세요.
   // ---------------------------------------------------------
-  const KAKAO_JS_KEY     = ''; // placeholder: 카카오 JavaScript 키 (https://developers.kakao.com/)
+  const KAKAO_JS_KEY     = '0a9b30e3ac311ebc75af75fb3290f2cd'; // 카카오 JavaScript 키
   const GUESTBOOK_URL    = ''; // placeholder: 외부 방명록 폼 URL
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
   const BGM_SRC          = ''; // placeholder: 사용 허가된 음원 파일 경로 (예: 'audio/bgm.mp3')
