@@ -7,7 +7,7 @@
   'use strict';
 
   // ---------------------------------------------------------
-  // PLACEHOLDERS — 실제 운영 시 아래 값을 채워주세요.
+  // PLACEHOLDERS — 실제 운영 시 아래 값을 채워 주세요.
   // ---------------------------------------------------------
   const KAKAO_JS_KEY     = '0a9b30e3ac311ebc75af75fb3290f2cd'; // 카카오 JavaScript 키
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
@@ -485,7 +485,7 @@
           showToast('계좌번호가 복사되었습니다');
           setTimeout(() => btn.classList.remove('is-copied'), 1400);
         } else {
-          showToast('복사에 실패했습니다. 직접 선택해주세요');
+          showToast('복사에 실패했습니다. 직접 선택해 주세요');
         }
       });
     });
@@ -579,7 +579,7 @@
       if (!entries.length) {
         const empty = document.createElement('li');
         empty.className = 'guestbook-empty';
-        empty.textContent = '첫 번째 축하 메시지를 남겨주세요.';
+        empty.textContent = '첫 번째 축하 메시지를 남겨 주세요.';
         list.append(empty);
         return;
       }
@@ -658,10 +658,9 @@
     const status = $('#match-status');
     const restart = $('#match-restart');
     const result = $('#fortune-result');
-    const scoreEl = $('#fortune-score');
+    const scoreEl = $('#fortune-score-number');
     const readingEl = $('#fortune-reading');
     const warmEl = $('#fortune-warm-message');
-    const warmSourceEl = $('#fortune-warm-source');
     if (!boardEl || !movesEl || !combosEl || !status || !restart || !result) return;
 
     const size = 8;
@@ -674,16 +673,18 @@
       { icon: '🍀', name: '클로버' },
       { icon: '🎀', name: '리본' }
     ];
-    const philosopherWords = [
-      { text: '어려움은\n우리가 어떤 사람인지 보여줍니다.', source: '에픽테토스 · 담화록 1.24' },
-      { text: '마음은 장애물을\n앞으로 나아갈 힘으로 바꿉니다.', source: '마르쿠스 아우렐리우스 · 명상록 5.20' },
-      { text: '힘든 순간에도\n마음의 힘은 자라납니다.', source: '세네카 · 섭리에 관하여에서 착안' }
+    const warmMessages = [
+      '오늘의 작은 기쁨이\n내일의 큰 행복으로 이어지길 바랍니다.',
+      '좋은 인연과 따뜻한 마음이\n늘 곁에 머물기를 바랍니다.',
+      '바라는 일마다 기분 좋은 소식이\n찾아오는 하루가 되길 바랍니다.',
+      '웃음이 가득한 순간들이\n오래도록 이어지길 바랍니다.',
+      '오늘 나눈 축복만큼\n행복이 넉넉히 돌아오길 바랍니다.'
     ];
     const readings = [
-      '세 가지 마음이 한 줄로 모인 흐름처럼, 화합의 기운이 기쁜 인연을 부릅니다.',
+      '세 가지 타일이 한 줄로 모인 것처럼, 좋은 인연과 기쁜 소식이 이어집니다.',
       '축복을 나누고 모은 기운이 길합니다. 반가운 소식과 웃음이 오래 이어집니다.',
       '서로를 향한 따뜻한 마음이 복을 부르는 날, 좋은 인연이 곁에 머뭅니다.',
-      '정성껏 모은 세 번의 조합처럼, 작은 기쁨이 큰 행운으로 이어집니다.',
+      '정성껏 모은 조합처럼, 작은 기쁨이 큰 행운으로 이어집니다.',
       '오늘은 화목의 기운이 맑습니다. 나눈 축복이 좋은 소식으로 돌아옵니다.',
       '마음이 같은 방향을 향하는 날입니다. 기쁜 만남과 평안한 기운이 함께합니다.'
     ];
@@ -789,12 +790,11 @@
     function win() {
       finished = true;
       const score = 95 + Math.floor(Math.random() * 6);
-      scoreEl.textContent = score + '점';
+      scoreEl.textContent = String(score);
       readingEl.textContent = readings[score - 95];
-      if (warmEl) warmEl.textContent = philosopherWords[Math.floor(Math.random() * philosopherWords.length)].text;
-      if (warmSourceEl) warmSourceEl.textContent = philosopherWords.find((item) => item.text === warmEl?.textContent)?.source || '';
+      if (warmEl) warmEl.textContent = warmMessages[Math.floor(Math.random() * warmMessages.length)];
       result.hidden = false;
-      status.textContent = '퍼즐을 풀었어요. 오늘의 행운을 확인해보세요.';
+      status.textContent = '퍼즐을 풀었어요. 오늘의 행운을 확인해 보세요.';
       draw();
       result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
@@ -815,8 +815,8 @@
       }
       busy = false;
       draw();
-      if (moves <= 0) status.textContent = '이번 판은 여기까지예요. 다시 섞어서 도전해보세요.';
-      else status.textContent = '좋아요! 같은 타일 3개를 더 맞춰주세요.';
+      if (moves <= 0) status.textContent = '이번 판은 여기까지예요. 다시 섞어서 도전해 보세요.';
+      else status.textContent = '좋아요! 같은 타일 3개를 더 맞춰 주세요.';
     }
 
     function adjacent(a, b) {
@@ -837,7 +837,7 @@
       if (!groups.length) {
         [cells[selected], cells[index]] = [cells[index], cells[selected]];
         selected = -1;
-        status.textContent = '그 자리에서는 조합이 안 돼요. 다시 골라보세요.';
+        status.textContent = '다른 조합도 찾아볼까요? 타일을 다시 골라 보세요.';
         draw();
         return;
       }
@@ -845,7 +845,7 @@
       selected = -1;
       status.textContent = '조합을 찾았어요!';
       await resolve(groups);
-      if (!finished && moves <= 0) status.textContent = '이번 판은 여기까지예요. 다시 섞어서 도전해보세요.';
+      if (!finished && moves <= 0) status.textContent = '새 조합이 기다리고 있어요. 다시 섞어서 도전해 보세요!';
     });
 
     restart.addEventListener('click', () => {
@@ -859,8 +859,7 @@
       scoreEl.textContent = '';
       readingEl.textContent = '';
       if (warmEl) warmEl.textContent = '';
-      if (warmSourceEl) warmSourceEl.textContent = '';
-      status.textContent = '이웃한 타일 두 개를 차례로 눌러 바꿔보세요.';
+      status.textContent = '이웃한 타일 두 개를 차례로 눌러 바꿔 보세요.';
       draw();
     });
     cells = newBoard();
@@ -891,7 +890,7 @@
         form.reset();
         status.textContent = '회신을 잘 받았습니다. 알려주셔서 고맙습니다.';
       } catch (error) {
-        status.textContent = '회신을 보내지 못했어요. 잠시 후 다시 시도해주세요.';
+        status.textContent = '회신이 전송되지 않았어요. 잠시 후 다시 시도해 주세요.';
       } finally {
         submit.disabled = false;
       }
@@ -1070,4 +1069,5 @@
     init();
   }
 })();
+
 
