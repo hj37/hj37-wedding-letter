@@ -587,14 +587,13 @@
     const render = () => {
       stage.replaceChildren();
       entries.forEach((entry, index) => {
-        const avatar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        avatar.setAttribute('viewBox', '0 0 40 60');
+        const minimiId = Math.min(6, Math.max(1, Number(entry.minimi_id) || 1));
+        const avatar = document.createElement('img');
+        avatar.src = `images/minimi-${minimiId}.svg`;
+        avatar.alt = `하객 미니미 ${index + 1}`;
         avatar.setAttribute('class', 'guest-minimi-avatar');
         avatar.setAttribute('role', 'listitem');
-        avatar.setAttribute('aria-label', `하객 미니미 ${index + 1}`);
-        const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-        use.setAttribute('href', `#minimi-guest-${entry.minimi_id}`);
-        avatar.append(use);
+        avatar.draggable = false;
         avatar.style.left = `${8 + ((index * 13) % 84)}%`;
         avatar.style.animationDelay = `${(index % 5) * 80}ms`;
         stage.append(avatar);
