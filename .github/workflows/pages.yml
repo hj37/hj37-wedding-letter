@@ -37,22 +37,21 @@ jobs:
       - name: Decrypt wedding photos for public Pages deployment
         env:
           WEDDING_PHOTOS_PASSPHRASE: ${{ secrets.WEDDING_PHOTOS_PASSPHRASE }}
+          PHOTOS_INPUT_DIR: photos/encrypted
+          PHOTOS_OUTPUT_DIR: dist/images
         run: |
           shopt -s nullglob
-          encrypted_photos=(photos/encrypted/*.gpg)
+          encrypted_photos=(photos/encrypted/*.enc)
           if (("${#encrypted_photos[@]}" == 0)); then
             echo "No encrypted wedding photos found; keeping the design placeholders."
             exit 0
           fi
           if [[ -z "${WEDDING_PHOTOS_PASSPHRASE:-}" ]]; then
-            echo "Set the WEDDING_PHOTOS_PASSPHRASE Actions secret before deploying encrypted photos." >&2
-            exit 1
+            echo "WEDDING_PHOTOS_PASSPHRASE is not configured; publishing the placeholder image until the Actions secret is added."
+            sed -i 's#images/hero-photo.jpg#images/hero-photo-slot.svg#g' dist/index.html
+            exit 0
           fi
-          mkdir -p dist/images
-          for encrypted in "${encrypted_photos[@]}"; do
-            filename="$(basename "$encrypted" .gpg)"
-            printf '%s\n' "$WEDDING_PHOTOS_PASSPHRASE" | gpg --batch --pinentry-mode loopback --passphrase-fd 0 --output "dist/images/$filename" --decrypt "$encrypted"
-          done
+          node scripts/decrypt-photos.mjs
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
