@@ -51,9 +51,7 @@ jobs:
           mkdir -p dist/images
           for encrypted in "${encrypted_photos[@]}"; do
             filename="$(basename "$encrypted" .gpg)"
-            printf '%s\\n' "$WEDDING_PHOTOS_PASSPHRASE" | \\
-              gpg --batch --pinentry-mode loopback --passphrase-fd 0 \\
-                --output "dist/images/$filename" --decrypt "$encrypted"
+            printf '%s\n' "$WEDDING_PHOTOS_PASSPHRASE" | gpg --batch --pinentry-mode loopback --passphrase-fd 0 --output "dist/images/$filename" --decrypt "$encrypted"
           done
 
       - name: Upload site artifact
