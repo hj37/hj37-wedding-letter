@@ -3,6 +3,10 @@
     <path fill="#443b36" d="M16 5h16v3h4v5h3v11h-4v5h-4v-4H17v4h-4v-5H9V13h4V8h3z"/>
     <path fill="#f0c6a4" d="M16 12h16v3h3v9h-3v5H16v-5h-3v-9h3z"/>
     <path fill="#32272b" d="M15 19h2v-1h5v1h1v4h-1v1h-6v-1h-1z M26 19h2v-1h5v1h1v4h-1v1h-6v-1h-1z" stroke="none"/>
+    <path fill="#95604a" d="M18 20h3v3h-3zm11 0h3v3h-3z" stroke="none"/>
+    <path fill="#fffaf0" d="M16 20h2v2h-2zm11 0h2v2h-2z" stroke="none"/>
+    <path fill="#e9ad63" d="M20 22h1v1h-1zm11 0h1v1h-1z" stroke="none"/>
+    <path fill="#d88b87" d="M13 24h3v1h-3zm20 0h3v1h-3z" stroke="none"/>
     <path fill="#b87571" d="M21 25h7v2h-7z" stroke="none"/>
     <path fill="#5d473c" d="M13 9h4v7h-4zm16-2h4v5h-4zm-17 8h3v8h-3zm21-2h3v10h-3z" stroke="none"/>
     <path fill="#b58c68" d="M18 31h12v4h5v10h-4v4H17v-4h-4V35h5z"/>
@@ -13,4 +17,3 @@
     <path fill="#a8b99d" d="M18 34h12v3H18zm4-3h4v3h-4z" stroke="none"/>
   </g>
 </svg>
-
