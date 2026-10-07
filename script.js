@@ -208,29 +208,17 @@
 
     if (diff > 0) {
       ddayNum.dataset.target = String(diff);
-      ddayNum.textContent = isReduced() ? String(diff) : '0';
+      ddayNum.textContent = String(diff);
     } else if (diff === 0) {
       ddayBlock.innerHTML = '<span class="script" style="font-size:24px;color:var(--color-primary)">오늘</span><br><span style="font-size:14px;color:var(--color-muted)">두 사람이 부부가 됩니다</span>';
       if (ddayLabel) ddayLabel.style.display = 'none';
     } else {
       ddayNum.dataset.target = String(-diff);
-      ddayNum.textContent = isReduced() ? String(-diff) : '0';
+      ddayNum.textContent = String(-diff);
       if (ddayLabel) ddayLabel.textContent = '결혼한 지';
       ddayBlock.firstChild.textContent = 'D+';
     }
 
-    // count-up 애니메이션
-    if (!isReduced() && diff !== 0) {
-      const onIntersect = (entries, obs) => {
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          countUp(ddayNum, parseInt(ddayNum.dataset.target, 10), 1400);
-          obs.disconnect();
-        });
-      };
-      new IntersectionObserver(onIntersect, { threshold: 0.4 })
-        .observe($('#calendar'));
-    }
   }
 
   function countUp(el, target, dur) {
