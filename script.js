@@ -17,7 +17,7 @@
   const SUPABASE_URL      = 'https://lcukpufzpijhwqdpejyx.supabase.co';
   const SUPABASE_KEY      = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjdWtwdWZ6cGlqaHdxZHBlanl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3NTE4MjAsImV4cCI6MjA3NzMyNzgyMH0.s1qRdFzgS8SPBYcA419eEwrBV6fXslHxoaZIrYZNovg';
   const SHARE_TITLE      = '윤호진 ♡ 박선영 결혼합니다';
-  const SHARE_DESC       = '2027년 3월 6일 토요일 오후 1시 40분\n창원 세코 더 그레이드 웨딩홀';
+  const SHARE_DESC       = '2027년 3월 6일 토요일 오후 1시 40분\n창원컨벤션센터(CECO) 3층 더 그레이드';
   const SHARE_IMAGE      = location.origin + location.pathname.replace(/\/[^/]*$/, '/') + 'images/og-thumbnail.png';
   const TARGET_DATE_STR  = '2027-03-06';
   const TARGET_HOUR      = 13;
@@ -766,7 +766,7 @@
         const geocoder = new maps.services.Geocoder();
         geocoder.addressSearch('경상남도 창원시 성산구 원이대로 362', (result, status) => {
           if (status === maps.services.Status.OK && result[0]) {
-            showMap(Number(result[0].y), Number(result[0].x), '세코 더 그레이드 웨딩홀');
+            showMap(Number(result[0].y), Number(result[0].x), '창원컨벤션센터(CECO) 3층 더 그레이드');
           }
         });
       });
