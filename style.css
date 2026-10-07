@@ -1281,7 +1281,6 @@ body::before { opacity: .06; animation: none; }
 .section { border-bottom: 1px solid #e8e7e4; }
 .section-title { color: #343330; }
 .section-eyebrow { color: #73716c; }
-img { filter: grayscale(100%); }
 .acc-group, .map-static, .gallery-stage {
   border: 1px solid #deddda;
   background-color: #fff;
