@@ -660,10 +660,11 @@
     const result = $('#fortune-result');
     const scoreEl = $('#fortune-score');
     const readingEl = $('#fortune-reading');
+    const warmEl = $('#fortune-warm-message');
     if (!boardEl || !movesEl || !combosEl || !status || !restart || !result) return;
 
-    const size = 6;
-    const moveLimit = 12;
+    const size = 8;
+    const moveLimit = 20;
     const goal = 3;
     const tiles = [
       { icon: '💍', name: '반지' },
@@ -784,6 +785,7 @@
       const score = 95 + Math.floor(Math.random() * 6);
       scoreEl.textContent = score + '점';
       readingEl.textContent = readings[score - 95];
+      if (warmEl) warmEl.textContent = '두 분의 오늘이 서로에게 가장 든든한 행운으로 오래 이어지길 바랍니다.';
       result.hidden = false;
       status.textContent = '퍼즐을 풀었어요. 오늘의 행운을 확인해보세요.';
       draw();
@@ -849,11 +851,47 @@
       result.hidden = true;
       scoreEl.textContent = '';
       readingEl.textContent = '';
+      if (warmEl) warmEl.textContent = '';
       status.textContent = '이웃한 타일 두 개를 차례로 눌러 바꿔보세요.';
       draw();
     });
     cells = newBoard();
     draw();
+  }
+
+  // Private RSVP: submit only; responses are not readable from the public page.
+  function setupRsvp() {
+    const form = $('#rsvp-form');
+    const status = $('#rsvp-status');
+    const submit = $('#rsvp-submit');
+    if (!form || !status || !submit) return;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const guestName = String(data.get('guest_name') || '').trim();
+      const side = String(data.get('side') || '');
+      const attending = String(data.get('attending') || '') === 'yes';
+      if (!guestName || !['groom', 'bride'].includes(side)) {
+        status.textContent = '이름과 신랑측/신부측을 확인해주세요.';
+        return;
+      }
+      submit.disabled = true;
+      status.textContent = '회신을 보내고 있어요.';
+      try {
+        const response = await fetch(SUPABASE_URL + '/rest/v1/wedding_rsvp', {
+          method: 'POST',
+          headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: JSON.stringify({ guest_name: guestName, side, attending })
+        });
+        if (!response.ok) throw new Error('RSVP submission failed');
+        form.reset();
+        status.textContent = '회신을 잘 받았습니다. 알려주셔서 고맙습니다.';
+      } catch (error) {
+        status.textContent = '회신을 보내지 못했어요. 잠시 후 다시 시도해주세요.';
+      } finally {
+        submit.disabled = false;
+      }
+    });
   }
 
   // 10. Share (Kakao / link copy) (motion §3-7)
@@ -1008,6 +1046,7 @@
     setupMusic();
     setupGuestbook();
     setupLuckyPuzzle();
+    setupRsvp();
     setupShare();
     setupVenueDirections();
     setupKakaoMap();

@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=guestbook-puzzle-20261007">
+  <link rel="stylesheet" href="style.css?v=rsvp-puzzle-20261007">
 </head>
 <body>
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
@@ -199,14 +199,14 @@
       <p class="account-message">축하의 마음을 전하실 수 있도록<br>계좌 정보를 안내드립니다.</p>
       <div class="acc-group">
         <h3 class="acc-group-title">신랑측 계좌 안내</h3><ul class="acc-list">
-          <li><p class="acc-name">신랑 아버지 윤태환</p><p class="acc-num">국민은행 960101-01-267910</p><button type="button" class="copy-btn" data-copy="국민은행 960101-01-267910 윤태환" aria-label="윤태환 계좌번호 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
-          <li><p class="acc-name">신랑 어머니 주은정</p><p class="acc-num">부산은행 056-12-060250-7</p><button type="button" class="copy-btn" data-copy="부산은행 056-12-060250-7 주은정" aria-label="주은정 계좌번호 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
+          <li><p class="acc-name">신랑 아버지 윤태환</p><p class="acc-num">국민은행 96010101267910</p><button type="button" class="copy-btn" data-copy="96010101267910" aria-label="윤태환 계좌번호만 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
+          <li><p class="acc-name">신랑 어머니 주은정</p><p class="acc-num">부산은행 056120602507</p><button type="button" class="copy-btn" data-copy="056120602507" aria-label="주은정 계좌번호만 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
         </ul>
       </div>
       <div class="acc-group">
         <h3 class="acc-group-title">신부측 계좌 안내</h3><ul class="acc-list">
-          <li><p class="acc-name">신부 아버지 박문수</p><p class="acc-num">농협 82111252041801</p><button type="button" class="copy-btn" data-copy="농협 82111252041801 박문수" aria-label="박문수 계좌번호 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
-          <li><p class="acc-name">신부 어머니 하미화</p><p class="acc-num">농협 3020494538881</p><button type="button" class="copy-btn" data-copy="농협 3020494538881 하미화" aria-label="하미화 계좌번호 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
+          <li><p class="acc-name">신부 아버지 박문수</p><p class="acc-num">농협은행 82111252041801</p><button type="button" class="copy-btn" data-copy="82111252041801" aria-label="박문수 계좌번호만 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
+          <li><p class="acc-name">신부 어머니 하미화</p><p class="acc-num">농협은행 3020494538881</p><button type="button" class="copy-btn" data-copy="3020494538881" aria-label="하미화 계좌번호만 복사"><span class="copy-default">복사</span><span class="copy-done" aria-hidden="true">완료</span></button></li>
         </ul>
       </div>
     </section>
@@ -249,7 +249,7 @@
       <h2 class="section-title" id="lucky-puzzle-heading">행운을 맞춰보세요</h2>
       <p class="lucky-game-intro">이웃한 타일을 바꿔 같은 모양 3개를 맞춰주세요.<br>조합을 세 번 만들면 오늘의 행운이 열립니다.</p>
       <div class="match-game-meta" aria-live="polite">
-        <span>남은 움직임 <b id="match-moves">12</b></span>
+        <span>남은 움직임 <b id="match-moves">20</b></span>
         <span>모은 조합 <b id="match-combos">0</b> / 3</span>
       </div>
       <div class="match-board" id="match-board" role="group" aria-label="3매치 행운 퍼즐판"></div>
@@ -260,7 +260,31 @@
         <h3>오늘의 행운점수</h3>
         <p class="fortune-score" id="fortune-score"></p>
         <p class="fortune-reading" id="fortune-reading"></p>
+        <p class="fortune-warm-message" id="fortune-warm-message"></p>
       </article>
+    </section>
+
+    <section class="section rsvp reveal" id="rsvp" aria-labelledby="rsvp-heading">
+      <p class="section-eyebrow en">KINDLY REPLY</p>
+      <h2 class="section-title" id="rsvp-heading">참석 여부 회신</h2>
+      <p class="rsvp-message">예식 준비를 위해 참석 여부를 알려주시면 감사하겠습니다.<br>회신은 두 사람만 확인할 수 있습니다.</p>
+      <form class="rsvp-form" id="rsvp-form">
+        <label for="rsvp-name">이름</label>
+        <input id="rsvp-name" name="guest_name" type="text" maxlength="24" autocomplete="name" required placeholder="성함을 입력해주세요">
+        <label for="rsvp-side">어느 쪽 하객이신가요?</label>
+        <select id="rsvp-side" name="side" required>
+          <option value="" selected disabled>선택해주세요</option>
+          <option value="groom">신랑측</option>
+          <option value="bride">신부측</option>
+        </select>
+        <fieldset class="rsvp-choice">
+          <legend>참석 여부</legend>
+          <label><input type="radio" name="attending" value="yes" required> 참석할게요</label>
+          <label><input type="radio" name="attending" value="no" required> 참석이 어려워요</label>
+        </fieldset>
+        <button class="btn primary" id="rsvp-submit" type="submit">회신 보내기</button>
+        <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
     <footer class="card-footer">
@@ -284,7 +308,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js?v=guestbook-puzzle-20261007"></script>
+  <script src="script.js?v=rsvp-puzzle-20261007"></script>
 </body>
 </html>
 

@@ -1615,20 +1615,32 @@ a { color: var(--color-accent); }
 /* Three-match luck puzzle */
 .lucky-game { background: #f3f1ed; }
 .lucky-game-intro { margin: -12px auto 22px; color: var(--color-muted); font-size: 14px; }
-.match-game-meta { display: flex; justify-content: space-between; max-width: 360px; margin: 0 auto 12px; color: var(--color-muted); font: 12px var(--font-ko-sans); }
+.match-game-meta { display: flex; justify-content: space-between; gap: 10px; max-width: 420px; margin: 0 auto 12px; color: var(--color-muted); font: 12px var(--font-ko-sans); }
 .match-game-meta b { color: var(--color-text); font-size: 14px; }
-.match-board { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; width: 100%; max-width: 360px; margin: 0 auto; padding: 10px; border: 1px solid #e3ded6; border-radius: 16px; background: #eae6df; }
-.match-tile { display: grid; place-items: center; width: 100%; aspect-ratio: 1; border: 1px solid #e1ddd6; border-radius: 11px; background: #fff; font-size: clamp(20px, 6vw, 29px); line-height: 1; box-shadow: 0 2px 5px #27221a0c; transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, opacity 150ms ease; }
+.match-board { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 5px; width: 100%; max-width: 420px; margin: 0 auto; padding: 10px; border: 1px solid #e3ded6; border-radius: 16px; background: #eae6df; }
+.match-tile { display: grid; place-items: center; min-width: 0; width: 100%; aspect-ratio: 1; border: 1px solid #e1ddd6; border-radius: 11px; background: #fff; font-size: clamp(17px, 5vw, 25px); line-height: 1; box-shadow: 0 2px 5px #27221a0c; transition: transform 140ms ease, border-color 140ms ease, background 140ms ease, opacity 150ms ease; }
 .match-tile.is-selected { transform: scale(.91); border: 2px solid #8b735c; background: #f6eee4; box-shadow: 0 0 0 3px #8b735c24; }
 .match-tile:disabled { cursor: default; }
 .match-status { min-height: 2.8em; margin: 12px auto 6px; color: var(--color-muted); font: 13px/1.6 var(--font-ko-sans); }
 .match-restart { margin: 0 auto; min-height: 42px; }
-.fortune-result { max-width: 360px; margin: 28px auto 0; padding: 24px 18px; border: 1px solid #ded5c8; border-radius: 16px; background: #fff; animation: fortuneReveal 500ms ease both; }
+.fortune-result { box-sizing: border-box; width: min(100%, 420px); margin: 28px auto 0; padding: 24px 18px; overflow: hidden; text-align: center; border: 1px solid #ded5c8; border-radius: 16px; background: #fff; animation: fortuneReveal 500ms ease both; }
 .fortune-result[hidden] { display: none; }
 .fortune-result .section-eyebrow { margin-bottom: 6px; }
 .fortune-result h3 { color: var(--color-text); font-size: 16px; }
-.fortune-score { margin: 4px 0 12px; color: #8b735c; font: 600 42px/1.2 var(--font-en-serif); }
-.fortune-reading { color: var(--color-text); font-size: 14px; line-height: 1.8; word-break: keep-all; }
+.fortune-score { margin: 4px 0 12px; color: #8b735c; font: 600 clamp(38px, 12vw, 52px)/1.2 var(--font-en-serif); font-variant-numeric: tabular-nums; }
+.fortune-reading { color: var(--color-text); font-size: 14px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
+.fortune-warm-message { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eee8df; color: #75624d; font-size: 13px; line-height: 1.8; word-break: keep-all; }
+.rsvp { background: #f7f6f2; }
+.rsvp-message { margin: -12px auto 24px; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
+.rsvp-form { display: grid; gap: 10px; max-width: 410px; margin: 0 auto; padding: 18px; border: 1px solid #e4dfd7; border-radius: 14px; background: #fff; text-align: left; }
+.rsvp-form > label, .rsvp-choice legend { margin-top: 4px; color: var(--color-text); font-size: 13px; font-weight: 700; }
+.rsvp-form input[type="text"], .rsvp-form select { width: 100%; padding: 12px 13px; border: 1px solid #dedbd4; border-radius: 9px; background: #fff; color: var(--color-text); font: 14px/1.6 var(--font-ko-sans); }
+.rsvp-choice { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 6px 0; padding: 12px; border: 1px solid #e8e4dd; border-radius: 10px; }
+.rsvp-choice legend { padding: 0 5px; }
+.rsvp-choice label { display: inline-flex; align-items: center; gap: 7px; color: var(--color-text); font-size: 13px; }
+.rsvp-form input:focus, .rsvp-form select:focus { outline: 2px solid #b8a28c; outline-offset: 1px; }
+.rsvp-form button { min-height: 44px; }
+.rsvp-status { min-height: 1.5em; margin: 0; color: var(--color-muted); font-size: 12px; line-height: 1.5; text-align: center; }
 @keyframes fortuneReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 360px) {
   .guestbook-form { padding: 14px; }
