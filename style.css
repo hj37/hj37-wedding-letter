@@ -1414,11 +1414,10 @@ img { filter: grayscale(100%); }
 /* Small, colorful guest minimi on the restrained editorial invitation. */
 .miniroom-art { filter: none; }
 .minimi-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-.minimi-choice {
-  min-height: 76px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+.minimi-choice { min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   border: 1px solid #e5e3df; border-radius: 6px; background: #fff; color: #55534e; cursor: pointer;
 }
-.minimi-choice img { width: 36px; height: 48px; object-fit: contain; image-rendering: pixelated; }
+.minimi-choice img { width: 42px; height: 60px; object-fit: contain; image-rendering: pixelated; }
 .minimi-choice span { font-size: 10px; }
 .minimi-choice.is-selected { border-color: #79766f; background: #f4f3f0; box-shadow: inset 0 0 0 1px #79766f; }
 .minimi-choice:focus-visible, .minimi-add-button:focus-visible { outline: 2px solid #54534f; outline-offset: 2px; }
@@ -1427,7 +1426,7 @@ img { filter: grayscale(100%); }
 .minimi-save-note { min-height: 1.5em; margin: 8px 0 0; color: #74716c; font-size: 11px; text-align: center; }
 .guest-minimi-stage { position: absolute; z-index: 3; inset: auto 0 6% 0; height: 31%; pointer-events: none; }
 .guest-minimi-avatar {
-  position: absolute; bottom: 0; width: clamp(15px, 5.2vw, 27px); height: auto; max-height: 74px;
+  position: absolute; bottom: 0; width: clamp(18px, 5.8vw, 31px); height: auto; max-height: 78px;
   overflow: visible; image-rendering: pixelated; filter: drop-shadow(0 1px 1px #38373522);
   animation: minimi-arrive .35s ease-out both;
 }
