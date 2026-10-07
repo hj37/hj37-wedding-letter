@@ -34,6 +34,28 @@ jobs:
           cp -R images dist/
           if [ -f audio/bgm.mp3 ]; then cp audio/bgm.mp3 dist/audio/bgm.mp3; fi
 
+      - name: Decrypt wedding photos for public Pages deployment
+        env:
+          WEDDING_PHOTOS_PASSPHRASE: ${{ secrets.WEDDING_PHOTOS_PASSPHRASE }}
+        run: |
+          shopt -s nullglob
+          encrypted_photos=(photos/encrypted/*.gpg)
+          if (("${#encrypted_photos[@]}" == 0)); then
+            echo "No encrypted wedding photos found; keeping the design placeholders."
+            exit 0
+          fi
+          if [[ -z "${WEDDING_PHOTOS_PASSPHRASE:-}" ]]; then
+            echo "Set the WEDDING_PHOTOS_PASSPHRASE Actions secret before deploying encrypted photos." >&2
+            exit 1
+          fi
+          mkdir -p dist/images
+          for encrypted in "${encrypted_photos[@]}"; do
+            filename="$(basename "$encrypted" .gpg)"
+            printf '%s\\n' "$WEDDING_PHOTOS_PASSPHRASE" | \\
+              gpg --batch --pinentry-mode loopback --passphrase-fd 0 \\
+                --output "dist/images/$filename" --decrypt "$encrypted"
+          done
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
