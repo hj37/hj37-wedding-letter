@@ -47,9 +47,8 @@ jobs:
             exit 0
           fi
           if [[ -z "${WEDDING_PHOTOS_PASSPHRASE:-}" ]]; then
-            echo "WEDDING_PHOTOS_PASSPHRASE is not configured; publishing the placeholder image until the Actions secret is added."
-            sed -i 's#images/hero-photo.jpg#images/hero-photo-slot.svg#g' dist/index.html
-            exit 0
+            echo "Set the WEDDING_PHOTOS_PASSPHRASE Actions secret before deploying encrypted photos." >&2
+            exit 1
           fi
           node scripts/decrypt-photos.mjs
 
