@@ -243,17 +243,38 @@
       <p class="venue-name">창원 세코 더 그레이드 웨딩홀</p>
       <p class="venue-addr">경상남도 창원시 성산구 원이대로 362 (CECO)</p>
 
-      <!-- 지도: 카카오맵 SDK가 없으면 정적 placeholder -->
-      <!-- placeholder: KAKAO_JS_KEY 가 설정되면 카카오맵 SDK가 활성화됩니다. (script.js 의 KAKAO_JS_KEY 상수 확인) -->
-      <div id="map" class="map-static" aria-label="예식장 위치 지도">
-        <div class="map-pin">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 22s-7-7.58-7-12a7 7 0 1 1 14 0c0 4.42-7 12-7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.4" fill="#FBF7F3"/></svg>
-          <span>창원 세코 더 그레이드 웨딩홀</span>
+      <div class="map-shell">
+        <div id="map" class="kakao-map" aria-label="카카오맵 예식장 위치"></div>
+        <div id="map-fallback" class="map-fallback">
+          <span class="map-fallback-pin" aria-hidden="true">●</span>
+          <strong>창원 세코 더 그레이드 웨딩홀</strong>
+          <span>경상남도 창원시 성산구 원이대로 362</span>
+          <a href="https://map.kakao.com/link/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">카카오맵에서 위치 보기 ↗</a>
         </div>
       </div>
 
+      <div class="venue-route-tabs" role="tablist" aria-label="교통수단별 오시는 길">
+        <button type="button" id="route-tab-train" role="tab" aria-selected="true" aria-controls="route-panel-train" data-route-tab="train">기차</button>
+        <button type="button" id="route-tab-bus" role="tab" aria-selected="false" aria-controls="route-panel-bus" data-route-tab="bus" tabindex="-1">시외버스터미널</button>
+        <button type="button" id="route-tab-car" role="tab" aria-selected="false" aria-controls="route-panel-car" data-route-tab="car" tabindex="-1">자가용</button>
+      </div>
+      <div class="route-panel" id="route-panel-train" role="tabpanel" aria-labelledby="route-tab-train" data-route-panel="train">
+        <h3>기차로 오실 때</h3>
+        <p><strong>창원중앙역</strong>에서 약 5km, 차량으로 약 10분 거리입니다.</p>
+        <p class="route-note">CECO 안내 시내버스 220·221번을 이용할 수 있습니다.</p>
+      </div>
+      <div class="route-panel" id="route-panel-bus" role="tabpanel" aria-labelledby="route-tab-bus" data-route-panel="bus" hidden>
+        <h3>시외버스터미널에서 오실 때</h3>
+        <p><strong>창원시외버스터미널</strong>에서 약 2km, 차량으로 약 5분 거리입니다.</p>
+        <p class="route-note">택시 또는 대중교통을 이용해 주세요.</p>
+      </div>
+      <div class="route-panel" id="route-panel-car" role="tabpanel" aria-labelledby="route-tab-car" data-route-panel="car" hidden>
+        <h3>자가용으로 오실 때</h3>
+        <p><strong>경상남도 창원시 성산구 원이대로 362</strong><br>창원컨벤션센터(CECO)</p>
+        <p class="route-note">CECO 주차장 이용 가능 · 주차 공간 약 915면</p>
+      </div>
       <div class="venue-actions">
-        <a class="btn" href="https://map.kakao.com/link/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">카카오맵</a>
+        <a class="btn" href="https://map.kakao.com/link/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">카카오맵 길찾기</a>
         <a class="btn" href="https://map.naver.com/p/search/%EC%B0%BD%EC%9B%90%20%EC%84%B8%EC%BD%94%20%EB%8D%94%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C%20%EC%9B%A8%EB%94%A9%ED%99%80" target="_blank" rel="noopener">네이버지도</a>
       </div>
     </section>
