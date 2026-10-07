@@ -17,14 +17,15 @@
   </g>
 
   <g shape-rendering="crispEdges" aria-hidden="true">
-    <path fill="#382b30" d="M16 20h2v-2h7v2h2v7h-2v2h-7v-2h-2z M29 20h2v-2h7v2h2v7h-2v2h-7v-2h-2z"/>
-    <path fill="#fff8ef" d="M17 20h8v7h-8z M30 20h8v7h-8z"/>
-    <path fill="#98604e" d="M19 20h5v8h-5z M32 20h5v8h-5z"/>
-    <path fill="#342a34" d="M21 21h3v7h-3z M34 21h3v7h-3z"/>
-    <path fill="#ffffff" d="M18 20h2v2h-2z M31 20h2v2h-2z M23 23h1v1h-1z M36 23h1v1h-1z"/>
-    <path fill="#f7d782" d="M22 24h1v2h-1z M35 24h1v2h-1z"/>
-    <path fill="#e89d99" d="M15 29h4v2h-4z M38 29h4v2h-4z"/>
-    <path fill="#8a4b54" d="M24 32h2v1h-2z M26 33h5v1h-5z M31 32h2v1h-2z"/>
-  </g>
+ <path fill="#dcb99b" d="M16 18h26v12H16z"/>
+ <path fill="#382b30" d="M18 21h2v-1h4v1h2v4h-2v2h-4v-1h-2z M30 21h2v-1h4v1h2v4h-2v2h-4v-1h-2z"/>
+ <path fill="#fff8ef" d="M19 21h5v4h-5z M31 21h5v4h-5z"/>
+ <path fill="#98604e" d="M20 21h3v5h-3z M32 21h3v5h-3z"/>
+ <path fill="#342a34" d="M21 22h2v4h-2z M33 22h2v4h-2z"/>
+ <path fill="#ffffff" d="M19 21h2v2h-2z M31 21h2v2h-2z M23 23h1v1h-1z M35 23h1v1h-1z"/>
+ <path fill="#f7d782" d="M22 24h1v1h-1z M34 24h1v1h-1z"/>
+ <path fill="#e89d99" d="M16 29h3v1h-3z M39 29h3v1h-3z"/>
+ <path fill="#8a4b54" d="M25 32h2v1h-2z M27 33h3v1h-3z M30 32h2v1h-2z"/>
+</g>
 </svg>
 
