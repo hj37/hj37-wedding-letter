@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=rsvp-puzzle-20261007">
+  <link rel="stylesheet" href="style.css?v=rsvp-puzzle-v2-20261007">
 </head>
 <body>
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
@@ -247,10 +247,10 @@
     <section class="section lucky-game reveal" id="lucky-puzzle" aria-labelledby="lucky-puzzle-heading">
       <p class="section-eyebrow en">LUCKY MATCH</p>
       <h2 class="section-title" id="lucky-puzzle-heading">행운을 맞춰보세요</h2>
-      <p class="lucky-game-intro">이웃한 타일을 바꿔 같은 모양 3개를 맞춰주세요.<br>조합을 세 번 만들면 오늘의 행운이 열립니다.</p>
+      <p class="lucky-game-intro">이웃한 타일을 바꿔 같은 모양 3개를 맞춰주세요.<br>조합을 다섯 번 모으면 오늘의 행운이 열립니다.</p>
       <div class="match-game-meta" aria-live="polite">
         <span>남은 움직임 <b id="match-moves">20</b></span>
-        <span>모은 조합 <b id="match-combos">0</b> / 3</span>
+        <span>모은 조합 <b id="match-combos">0</b> / 5</span>
       </div>
       <div class="match-board" id="match-board" role="group" aria-label="3매치 행운 퍼즐판"></div>
       <p class="match-status" id="match-status" role="status" aria-live="polite">이웃한 타일 두 개를 차례로 눌러 바꿔보세요.</p>
@@ -261,22 +261,17 @@
         <p class="fortune-score" id="fortune-score"></p>
         <p class="fortune-reading" id="fortune-reading"></p>
         <p class="fortune-warm-message" id="fortune-warm-message"></p>
+        <p class="fortune-warm-source" id="fortune-warm-source"></p>
       </article>
     </section>
 
     <section class="section rsvp reveal" id="rsvp" aria-labelledby="rsvp-heading">
       <p class="section-eyebrow en">KINDLY REPLY</p>
       <h2 class="section-title" id="rsvp-heading">참석 여부 회신</h2>
-      <p class="rsvp-message">예식 준비를 위해 참석 여부를 알려주시면 감사하겠습니다.<br>회신은 두 사람만 확인할 수 있습니다.</p>
+      <p class="rsvp-message">일정 확인에 참고하려고 합니다.<br>편하실 때 참석 여부만 알려주세요. 답변은 두 사람만 확인합니다.</p>
       <form class="rsvp-form" id="rsvp-form">
-        <label for="rsvp-name">이름</label>
-        <input id="rsvp-name" name="guest_name" type="text" maxlength="24" autocomplete="name" required placeholder="성함을 입력해주세요">
-        <label for="rsvp-side">어느 쪽 하객이신가요?</label>
-        <select id="rsvp-side" name="side" required>
-          <option value="" selected disabled>선택해주세요</option>
-          <option value="groom">신랑측</option>
-          <option value="bride">신부측</option>
-        </select>
+        <label for="rsvp-name">이름 <span class="rsvp-optional">선택 입력</span></label>
+        <input id="rsvp-name" name="guest_name" type="text" maxlength="24" autocomplete="name" placeholder="이름 없이도 회신할 수 있어요">
         <fieldset class="rsvp-choice">
           <legend>참석 여부</legend>
           <label><input type="radio" name="attending" value="yes" required> 참석할게요</label>

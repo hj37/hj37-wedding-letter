@@ -661,17 +661,23 @@
     const scoreEl = $('#fortune-score');
     const readingEl = $('#fortune-reading');
     const warmEl = $('#fortune-warm-message');
+    const warmSourceEl = $('#fortune-warm-source');
     if (!boardEl || !movesEl || !combosEl || !status || !restart || !result) return;
 
     const size = 8;
     const moveLimit = 20;
-    const goal = 3;
+    const goal = 5;
     const tiles = [
       { icon: '💍', name: '반지' },
       { icon: '🤍', name: '하트' },
       { icon: '✨', name: '별빛' },
       { icon: '🍀', name: '클로버' },
       { icon: '🎀', name: '리본' }
+    ];
+    const philosopherWords = [
+      { text: '어려움은\n우리가 어떤 사람인지 보여줍니다.', source: '에픽테토스 · 담화록 1.24' },
+      { text: '마음은 장애물을\n앞으로 나아갈 힘으로 바꿉니다.', source: '마르쿠스 아우렐리우스 · 명상록 5.20' },
+      { text: '힘든 순간에도\n마음의 힘은 자라납니다.', source: '세네카 · 섭리에 관하여에서 착안' }
     ];
     const readings = [
       '세 가지 마음이 한 줄로 모인 흐름처럼, 화합의 기운이 기쁜 인연을 부릅니다.',
@@ -785,7 +791,8 @@
       const score = 95 + Math.floor(Math.random() * 6);
       scoreEl.textContent = score + '점';
       readingEl.textContent = readings[score - 95];
-      if (warmEl) warmEl.textContent = '두 분의 오늘이 서로에게 가장 든든한 행운으로 오래 이어지길 바랍니다.';
+      if (warmEl) warmEl.textContent = philosopherWords[Math.floor(Math.random() * philosopherWords.length)].text;
+      if (warmSourceEl) warmSourceEl.textContent = philosopherWords.find((item) => item.text === warmEl?.textContent)?.source || '';
       result.hidden = false;
       status.textContent = '퍼즐을 풀었어요. 오늘의 행운을 확인해보세요.';
       draw();
@@ -852,6 +859,7 @@
       scoreEl.textContent = '';
       readingEl.textContent = '';
       if (warmEl) warmEl.textContent = '';
+      if (warmSourceEl) warmSourceEl.textContent = '';
       status.textContent = '이웃한 타일 두 개를 차례로 눌러 바꿔보세요.';
       draw();
     });
@@ -869,10 +877,8 @@
       event.preventDefault();
       const data = new FormData(form);
       const guestName = String(data.get('guest_name') || '').trim();
-      const side = String(data.get('side') || '');
       const attending = String(data.get('attending') || '') === 'yes';
-      if (!guestName || !['groom', 'bride'].includes(side)) {
-        status.textContent = '이름과 신랑측/신부측을 확인해주세요.';
+      if (!form.reportValidity()) return;
         return;
       }
       submit.disabled = true;
@@ -881,7 +887,7 @@
         const response = await fetch(SUPABASE_URL + '/rest/v1/wedding_rsvp', {
           method: 'POST',
           headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-          body: JSON.stringify({ guest_name: guestName, side, attending })
+          body: JSON.stringify({ guest_name: guestName || '익명', attending })
         });
         if (!response.ok) throw new Error('RSVP submission failed');
         form.reset();

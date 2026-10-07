@@ -1629,12 +1629,14 @@ a { color: var(--color-accent); }
 .fortune-result h3 { color: var(--color-text); font-size: 16px; }
 .fortune-score { margin: 4px 0 12px; color: #8b735c; font: 600 clamp(38px, 12vw, 52px)/1.2 var(--font-en-serif); font-variant-numeric: tabular-nums; }
 .fortune-reading { color: var(--color-text); font-size: 14px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
-.fortune-warm-message { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eee8df; color: #75624d; font-size: 13px; line-height: 1.8; word-break: keep-all; }
+.fortune-warm-message { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eee8df; color: #75624d; font-size: 13px; line-height: 1.75; white-space: pre-line; word-break: keep-all; }
 .rsvp { background: #f7f6f2; }
 .rsvp-message { margin: -12px auto 24px; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
 .rsvp-form { display: grid; gap: 10px; max-width: 410px; margin: 0 auto; padding: 18px; border: 1px solid #e4dfd7; border-radius: 14px; background: #fff; text-align: left; }
 .rsvp-form > label, .rsvp-choice legend { margin-top: 4px; color: var(--color-text); font-size: 13px; font-weight: 700; }
 .rsvp-form input[type="text"], .rsvp-form select { width: 100%; padding: 12px 13px; border: 1px solid #dedbd4; border-radius: 9px; background: #fff; color: var(--color-text); font: 14px/1.6 var(--font-ko-sans); }
+.fortune-warm-source { margin: 8px 0 0; color: var(--color-muted); font-size: 11px; line-height: 1.5; }
+.rsvp-optional { color: var(--color-muted); font-size: 11px; font-weight: 400; }
 .rsvp-choice { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 6px 0; padding: 12px; border: 1px solid #e8e4dd; border-radius: 10px; }
 .rsvp-choice legend { padding: 0 5px; }
 .rsvp-choice label { display: inline-flex; align-items: center; gap: 7px; color: var(--color-text); font-size: 13px; }
