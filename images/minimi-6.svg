@@ -2,7 +2,7 @@
   <g stroke="#413a3d" stroke-width="1.5" stroke-linejoin="miter">
     <path fill="#51454a" d="M16 5h16v3h4v5h3v11h-4v5h-4v-4H17v4h-4v-5H9V13h4V8h3z"/>
     <path fill="#f0c6a5" d="M16 12h16v3h3v9h-3v5H16v-5h-3v-9h3z"/>
-    <path fill="#342e32" d="M17 19h3v3h-3zm11 0h3v3h-3z" stroke="none"/>
+    <path fill="#32272b" d="M15 19h2v-1h5v1h1v4h-1v1h-6v-1h-1z M26 19h2v-1h5v1h1v4h-1v1h-6v-1h-1z" stroke="none"/>
     <path fill="#bc7b7b" d="M21 25h7v2h-7z" stroke="none"/>
     <path fill="#4a3f42" d="M13 9h4v7h-4zm16-2h4v5h-4zm-17 8h3v8h-3zm21-2h3v10h-3z" stroke="none"/>
     <path fill="#8295b7" d="M18 31h12v4h5v10h-4v4H17v-4h-4V35h5z"/>
