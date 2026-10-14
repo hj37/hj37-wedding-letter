@@ -4,10 +4,13 @@ create table if not exists public.wedding_rsvp (
   guest_name text not null,
   side text check (side in ('groom', 'bride')),
   attending boolean not null,
-  note text not null default '' check (char_length(note) <= 300),
+  note text not null default '',
   created_at timestamptz not null default now(),
   constraint wedding_rsvp_name_length check (char_length(btrim(guest_name)) between 1 and 24)
 );
+alter table public.wedding_rsvp add column if not exists note text not null default '';
+alter table public.wedding_rsvp drop constraint if exists wedding_rsvp_note_length;
+alter table public.wedding_rsvp add constraint wedding_rsvp_note_length check (char_length(note) <= 300);
 alter table public.wedding_rsvp alter column side drop not null;
 alter table public.wedding_rsvp enable row level security;
 revoke all on table public.wedding_rsvp from anon, authenticated;
