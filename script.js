@@ -31,17 +31,6 @@
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
   const haptic = (n) => { try { navigator.vibrate && navigator.vibrate(n); } catch (e) {} };
 
-  // 0. Opening title card
-  function setupOpening() {
-    const root = document.documentElement;
-    if (!root.classList.contains('opening-active')) return;
-    window.setTimeout(() => {
-      root.classList.remove('opening-active');
-      root.classList.add('opening-closing');
-      window.setTimeout(() => root.classList.remove('opening-closing'), 900);
-    }, 3000);
-  }
-
   // ---------------------------------------------------------
   // 1. HERO entrance step-in
   // ---------------------------------------------------------
@@ -1052,7 +1041,6 @@
   // INIT
   // ---------------------------------------------------------
   function init() {
-    setupOpening();
     setupHero();
     setupReveal();
     setupPetals();

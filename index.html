@@ -25,23 +25,12 @@
   <!-- Fonts (Google Fonts CDN) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Sacramento&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=wedding-rsvp-v3-20261014">
-  <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.documentElement.classList.add('opening-active');
-    }
-  </script>
+  <link rel="stylesheet" href="style.css?v=hero-love-draw-v1-20261014">
 </head>
 <body>
-  <div class="opening-screen" aria-hidden="true">
-    <div class="opening-card">
-      <p class="opening-message">We are<br>Getting Married</p>
-    </div>
-  </div>
-
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
   <canvas class="bg-petals" aria-hidden="true"></canvas>
 
@@ -67,6 +56,9 @@
         </h1>
         <figure class="hero-photo-card" data-hero-step="4">
           <img class="hero-illustration" src="images/hero-photo.jpg" alt="윤호진과 박선영의 웨딩 사진" fetchpriority="high" width="900" height="1125">
+          <svg class="hero-love" viewBox="0 0 900 220" role="img" aria-label="Love">
+            <text x="450" y="166" text-anchor="middle">Love</text>
+          </svg>
         </figure>
         <p class="hero-date en" data-hero-step="5">03<span>.</span>06</p>
         <p class="hero-info" data-hero-step="6">2027년 3월 6일 토요일 오후 1시 40분<br>창원컨벤션센터(CECO) 3층 단독홀</p>
@@ -320,7 +312,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js?v=wedding-rsvp-v2-20261014"></script>
+  <script src="script.js?v=hero-love-draw-v1-20261014"></script>
 </body>
 </html>
 
