@@ -1450,22 +1450,23 @@ body { background-image: none; }
 .hero-love {
   position: absolute;
   z-index: 2;
-  top: 23%;
-  left: 2%;
-  width: 96%;
+  top: 11%;
+  left: 5%;
+  width: 90%;
   height: auto;
   overflow: visible;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
-  filter: drop-shadow(0 2px 3px #172a2d80);
+  opacity: .72;
+  filter: drop-shadow(0 1px 2px #172a2d55);
   animation: loveWrite 2.5s cubic-bezier(.55,.02,.35,1) 1.45s both;
 }
 .hero-love text {
   fill: #fff;
-  font-family: "Sacramento", var(--font-script);
-  font-size: 350px;
+  font-family: "Caveat", var(--font-script);
+  font-size: 320px;
   font-weight: 400;
-  letter-spacing: -5px;
+  letter-spacing: -2px;
 }
 @keyframes loveWrite {
   from { clip-path: inset(0 100% 0 0); }
