@@ -1320,7 +1320,7 @@ body::before { opacity: .06; animation: none; }
 .miniroom-visitors { margin-left: auto; display: flex; align-items: center; gap: 4px; white-space: nowrap; font: 10px var(--font-en-serif); letter-spacing: .04em; }
 .miniroom-visitors span { color: #81715e; }
 .miniroom-visitors b { color: #454440; font: 700 11px var(--font-ko-sans); }
-.miniroom-visitors i { margin: 0 2px; color: #c9c8c4; font-style: normal; }
+.miniroom-visitors i { margin: 0 2px; color: #c9c8c4; font-style: italic; }
 .miniroom-demo-note { display: none; }
 .miniroom-layout { padding: 9px; }
 .miniroom-sidebar { display: flex; align-items: center; gap: 8px; padding: 7px 2px 10px; margin-bottom: 5px; border-bottom: 1px solid #e9e8e5; background: transparent; }
@@ -1450,24 +1450,24 @@ body { background-image: none; }
 .hero-love {
   position: absolute;
   z-index: 2;
-  top: 11%;
-  left: 0;
-  width: 100%;
+  top: 9%;
+  left: -8%;
+  width: 116%;
   height: auto;
   overflow: visible;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
   opacity: .48;
   filter: drop-shadow(0 1px 2px #172a2d55);
-  animation: loveWrite 2.5s cubic-bezier(.55,.02,.35,1) 1.45s both;
+  animation: loveWrite 3.2s cubic-bezier(.55,.02,.35,1) 1.45s both;
 }
 .hero-love text {
   fill: #fff;
-  font-family: "Dancing Script", var(--font-script);
-  font-size: 340px;
+  font-family: "Caveat", var(--font-script);
+  font-size: 390px;
   font-weight: 400;
   letter-spacing: 0;
-  font-style: italic;
+  font-style: normal;
 }
 @keyframes loveWrite {
   from { clip-path: inset(0 100% 0 0); }
