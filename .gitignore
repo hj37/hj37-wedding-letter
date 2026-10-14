@@ -1,5 +1,7 @@
 .env
 .env.local
 /photos/originals/
+/photos/upload-ready/
+/photos/encrypted-new/
 
 /photos/README.local.md
