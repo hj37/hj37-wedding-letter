@@ -142,6 +142,54 @@ body::before {
   overflow: hidden;
 }
 
+/* Soft opening title card, matching the warm blush reference */
+html.opening-active,
+html.opening-closing { overflow: hidden; }
+.opening-screen {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 26px;
+  background: #f0f1f3;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 850ms ease, visibility 0s linear 850ms;
+}
+.opening-active .opening-screen {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 300ms ease, visibility 0s;
+}
+.opening-closing .opening-screen {
+  opacity: 0;
+  visibility: hidden;
+}
+.opening-card {
+  display: grid;
+  place-items: center;
+  width: min(100%, 560px);
+  min-height: 100svh;
+  border-radius: 28px;
+  background: #fff4ef;
+  box-shadow: 0 12px 40px rgba(71, 53, 55, 0.06);
+}
+.opening-message {
+  margin: 0;
+  color: #bd7180;
+  font-family: var(--font-script);
+  font-size: clamp(50px, 8vw, 66px);
+  font-weight: 400;
+  line-height: 1.08;
+  text-align: center;
+  animation: openingTextReveal 1.5s cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}
+@keyframes openingTextReveal {
+  from { opacity: 0; filter: blur(7px); transform: translateY(12px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
 /* === Section base === */
 .section {
   position: relative;
@@ -1632,16 +1680,20 @@ a { color: var(--color-accent); }
 .fortune-reading { color: var(--color-text); font-size: 14px; line-height: 1.8; word-break: keep-all; overflow-wrap: anywhere; }
 .fortune-warm-message { margin: 14px 0 0; padding-top: 14px; border-top: 1px solid #eee8df; color: #75624d; font-size: 13px; line-height: 1.75; white-space: pre-line; word-break: keep-all; }
 .rsvp { background: #f7f6f2; }
-.rsvp-message { margin: -12px auto 24px; color: var(--color-muted); font-size: 14px; line-height: 1.8; }
-.rsvp-form { display: grid; gap: 10px; max-width: 410px; margin: 0 auto; padding: 18px; border: 1px solid #e4dfd7; border-radius: 14px; background: #fff; text-align: left; }
-.rsvp-form > label, .rsvp-choice legend { margin-top: 4px; color: var(--color-text); font-size: 13px; font-weight: 700; }
-.rsvp-form input[type="text"], .rsvp-form select { width: 100%; padding: 12px 13px; border: 1px solid #dedbd4; border-radius: 9px; background: #fff; color: var(--color-text); font: 14px/1.6 var(--font-ko-sans); }
-.rsvp-optional { color: var(--color-muted); font-size: 11px; font-weight: 400; }
-.rsvp-choice { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 6px 0; padding: 12px; border: 1px solid #e8e4dd; border-radius: 10px; }
-.rsvp-choice legend { padding: 0 5px; }
-.rsvp-choice label { display: inline-flex; align-items: center; gap: 7px; color: var(--color-text); font-size: 13px; }
-.rsvp-form input:focus, .rsvp-form select:focus { outline: 2px solid #b8a28c; outline-offset: 1px; }
-.rsvp-form button { min-height: 44px; }
+.rsvp .section-title { color: #7a9a65; }
+.rsvp-message { margin: -10px auto 28px; color: var(--color-text); font-size: 15px; line-height: 1.8; }
+.rsvp-form { display: grid; gap: 12px; max-width: 468px; margin: 0 auto; padding: 22px 24px; border: 1px solid #e5e5e5; border-radius: 8px; background: #fff; text-align: left; }
+.rsvp-form > label, .rsvp-choice legend { margin: 3px 0 0; color: var(--color-text); font-size: 15px; font-weight: 500; }
+.rsvp-required { color: #82a66c; }
+.rsvp-form input[type="text"], .rsvp-form textarea { width: 100%; min-height: 54px; padding: 13px 16px; border: 1px solid #e5e5e5; border-radius: 8px; background: #fff; color: var(--color-text); font: 15px/1.6 var(--font-ko-sans); }
+.rsvp-form input::placeholder, .rsvp-form textarea::placeholder { color: #aaa; }
+.rsvp-form textarea { min-height: 106px; resize: vertical; }
+.rsvp-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; padding: 0; border: 0; }
+.rsvp-choice legend { margin: 0 0 10px; padding: 0; }
+.rsvp-choice label { display: flex; min-height: 54px; align-items: center; justify-content: center; gap: 9px; border: 1px solid #e5e5e5; border-radius: 8px; color: #777; font-size: 15px; cursor: pointer; }
+.rsvp-choice input[type="radio"] { width: 22px; height: 22px; margin: 0; accent-color: #7a9a65; }
+.rsvp-form input:focus, .rsvp-form textarea:focus { outline: 2px solid #91aa79; outline-offset: 1px; }
+.rsvp-form button.btn.primary { min-height: 56px; border-radius: 8px; background: #7a9a65; font-size: 16px; }
 .rsvp-status { min-height: 1.5em; margin: 0; color: var(--color-muted); font-size: 12px; line-height: 1.5; text-align: center; }
 @keyframes fortuneReveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 360px) {
@@ -1650,6 +1702,6 @@ a { color: var(--color-accent); }
   .match-tile { border-radius: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .match-tile, .fortune-result { transition: none; animation: none; }
+  .match-tile, .fortune-result, .opening-message { transition: none; animation: none; }
 }
 

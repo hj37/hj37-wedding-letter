@@ -31,6 +31,17 @@
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
   const haptic = (n) => { try { navigator.vibrate && navigator.vibrate(n); } catch (e) {} };
 
+  // 0. Opening title card
+  function setupOpening() {
+    const root = document.documentElement;
+    if (!root.classList.contains('opening-active')) return;
+    window.setTimeout(() => {
+      root.classList.remove('opening-active');
+      root.classList.add('opening-closing');
+      window.setTimeout(() => root.classList.remove('opening-closing'), 900);
+    }, 3000);
+  }
+
   // ---------------------------------------------------------
   // 1. HERO entrance step-in
   // ---------------------------------------------------------
@@ -876,7 +887,9 @@
       event.preventDefault();
       const data = new FormData(form);
       const guestName = String(data.get('guest_name') || '').trim();
+      const side = String(data.get('side') || '');
       const attending = String(data.get('attending') || '') === 'yes';
+      const note = String(data.get('note') || '').trim();
       if (!form.reportValidity()) return;
       submit.disabled = true;
       status.textContent = '회신을 보내고 있어요.';
@@ -884,7 +897,7 @@
         const response = await fetch(SUPABASE_URL + '/rest/v1/wedding_rsvp', {
           method: 'POST',
           headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-          body: JSON.stringify({ guest_name: guestName || '익명', attending })
+          body: JSON.stringify({ guest_name: guestName, side, attending, note })
         });
         if (!response.ok) throw new Error('RSVP submission failed');
         form.reset();
@@ -1039,6 +1052,7 @@
   // INIT
   // ---------------------------------------------------------
   function init() {
+    setupOpening();
     setupHero();
     setupReveal();
     setupPetals();

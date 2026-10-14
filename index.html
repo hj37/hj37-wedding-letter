@@ -28,9 +28,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=fortune-layout-v1-20261007">
+  <link rel="stylesheet" href="style.css?v=wedding-rsvp-v3-20261014">
+  <script>
+    if (!location.hash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('opening-active');
+    }
+  </script>
 </head>
 <body>
+  <div class="opening-screen" aria-hidden="true">
+    <div class="opening-card">
+      <p class="opening-message">We are<br>Getting Married</p>
+    </div>
+  </div>
+
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
   <canvas class="bg-petals" aria-hidden="true"></canvas>
 
@@ -266,17 +277,24 @@
 
     <section class="section rsvp reveal" id="rsvp" aria-labelledby="rsvp-heading">
       <p class="section-eyebrow en">KINDLY REPLY</p>
-      <h2 class="section-title" id="rsvp-heading">참석 여부 회신</h2>
-      <p class="rsvp-message">일정 확인을 위해, 편하실 때 참석 여부만 알려 주세요.</p>
+      <h2 class="section-title" id="rsvp-heading">참석 여부를 알려주세요</h2>
+      <p class="rsvp-message">축하의 마음으로 참석해 주시는 분들을 위해<br>미리 준비하고자 하오니<br>참석 여부를 알려주시면 감사하겠습니다.</p>
       <form class="rsvp-form" id="rsvp-form">
-        <label for="rsvp-name">이름 <span class="rsvp-optional">선택 입력</span></label>
-        <input id="rsvp-name" name="guest_name" type="text" maxlength="24" autocomplete="name" placeholder="이름 없이도 회신할 수 있어요">
         <fieldset class="rsvp-choice">
-          <legend>참석 여부</legend>
-          <label><input type="radio" name="attending" value="yes" required> 참석할게요</label>
-          <label><input type="radio" name="attending" value="no" required> 참석이 어려워요</label>
+          <legend>하객 구분 <span class="rsvp-required">*</span></legend>
+          <label><input type="radio" name="side" value="groom" required> 신랑측</label>
+          <label><input type="radio" name="side" value="bride" required> 신부측</label>
         </fieldset>
-        <button class="btn primary" id="rsvp-submit" type="submit">회신 보내기</button>
+        <fieldset class="rsvp-choice">
+          <legend>참석 여부 <span class="rsvp-required">*</span></legend>
+          <label><input type="radio" name="attending" value="yes" required> 참석</label>
+          <label><input type="radio" name="attending" value="no" required> 미참석</label>
+        </fieldset>
+        <label for="rsvp-name">성함 <span class="rsvp-required">*</span></label>
+        <input id="rsvp-name" name="guest_name" type="text" maxlength="24" autocomplete="name" placeholder="이름을 입력하세요" required>
+        <label for="rsvp-note">전달 사항</label>
+        <textarea id="rsvp-note" name="note" maxlength="300" placeholder="전달할 내용을 입력하세요 (선택)"></textarea>
+        <button class="btn primary" id="rsvp-submit" type="submit">참석 여부 전달하기</button>
         <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
       </form>
     </section>
@@ -302,7 +320,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js?v=rsvp-puzzle-v7-20261007"></script>
+  <script src="script.js?v=wedding-rsvp-v2-20261014"></script>
 </body>
 </html>
 
