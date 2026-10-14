@@ -1463,7 +1463,7 @@ body { background-image: none; }
 }
 .hero-love text {
   fill: #fff;
-  font-family: "Caveat", var(--font-script);
+  font-family: "Dancing Script", var(--font-script);
   font-size: 390px;
   font-weight: 400;
   letter-spacing: 0;
