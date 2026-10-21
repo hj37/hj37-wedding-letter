@@ -290,8 +290,7 @@ body::before {
   color: var(--color-text);
   letter-spacing: 0.18em;
 }
-.hero-heart { display: block; width: 25px; height: 23px; color: #8b7964; fill: currentColor; flex: 0 0 auto; }
-.hero-heart path + path { fill: none; stroke: #f8f8f6; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
+.hero-heart { display: block; width: 15px; height: 15px; color: #d87992; fill: currentColor; flex: 0 0 auto; }
 
 .hero-info {
   font-family: var(--font-ko-sans);
@@ -453,15 +452,14 @@ body::before {
 
 .couple-heart {
   display: block;
-  width: 39px;
-  height: 35px;
-  color: #8b7964;
+  width: 22px;
+  height: 22px;
+  color: #d87992;
   fill: currentColor;
   margin: 4px 0;
   opacity: 0;
   transition: opacity 600ms var(--ease-decelerate) 350ms;
 }
-.couple-heart path + path { fill: none; stroke: #f8f8f6; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
 .reveal.is-visible .couple-heart { opacity: 1; }
 
 /* ==========================================================
@@ -1443,7 +1441,7 @@ body { background-image: none; }
 .hero-eyebrow { margin: 0 0 14px; color: #73716c; font: 11px var(--font-en-serif); letter-spacing: .24em; }
 .hero-names { flex-direction: row; justify-content: center; gap: 10px; margin: 0 0 24px; }
 .hero-name-ko { font-size: clamp(22px, 7vw, 29px); font-weight: 400; letter-spacing: .16em; }
-.hero-heart { width: 25px; height: 23px; }
+.hero-heart { width: 15px; height: 15px; }
 .hero-photo-card { position: relative; overflow: hidden; margin: 0 auto; width: min(100%, 400px); }
 .hero-illustration { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; animation: none; opacity: 1; filter: none; transform: none; }
 .hero-love {
@@ -1511,9 +1509,8 @@ html, body { background: #e9e8e3; color: var(--color-text); }
 .hero { background: #f7f6f2; }
 .hero-eyebrow, .section-eyebrow { color: #817e76; }
 .hero-name-ko, .section-title { color: #292a29; }
-.hero-heart, .couple-heart { color: #8b7964; }
-.footer-heart { display: inline-block; width: .92em; height: .84em; margin: 0 .16em; color: #8b7964; fill: currentColor; vertical-align: -.08em; }
-.footer-heart path + path { fill: none; stroke: #f7f6f2; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
+.hero-heart, .couple-heart, .footer-heart { color: #d87992; }
+.footer-heart { display: inline-block; width: .78em; height: .78em; margin: 0 .2em; fill: currentColor; vertical-align: -.08em; }
 .hero-date { color: #282927; }
 .hero-info { color: #5f5e59; }
 .hero-gallery-link, .gallery-hint { color: #746f66; }
