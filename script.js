@@ -11,7 +11,7 @@
   // ---------------------------------------------------------
   const KAKAO_JS_KEY     = '0a9b30e3ac311ebc75af75fb3290f2cd'; // 카카오 JavaScript 키
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
-  const BGM_SRC          = ''; // placeholder: 사용 허가된 음원 파일 경로 (예: 'audio/bgm.mp3')
+  const BGM_SRC          = 'audio/wedding-piano-drum.mp3';
   // Public anon key: the database limits the shared guestbook to reading and adding messages.
   const SUPABASE_URL      = 'https://lcukpufzpijhwqdpejyx.supabase.co';
   const SUPABASE_KEY      = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjdWtwdWZ6cGlqaHdxZHBlanl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3NTE4MjAsImV4cCI6MjA3NzMyNzgyMH0.s1qRdFzgS8SPBYcA419eEwrBV6fXslHxoaZIrYZNovg';
@@ -515,23 +515,55 @@
     const btn = $('#music-toggle');
     const audio = $('#bgm');
     if (!btn || !audio) return;
-    if (!BGM_SRC) {
-      btn.hidden = true;
-      return;
-    }
-    btn.hidden = false;
-    audio.volume = 0;
+    audio.src = new URL(BGM_SRC, document.baseURI).href;
+    audio.volume = 0.35;
 
+    const setPlaying = (playing) => {
+      btn.setAttribute('aria-pressed', String(playing));
+      btn.setAttribute('aria-label', playing ? '배경 음악 끄기' : '배경 음악 재생');
+    };
+    const setOptOut = (disabled) => {
+      try {
+        if (disabled) localStorage.setItem('wedding-music-disabled', '1');
+        else localStorage.removeItem('wedding-music-disabled');
+      } catch (e) {}
+    };
+
+    let fadeFrame = 0;
     function fadeVolume(target, dur) {
+      if (fadeFrame) cancelAnimationFrame(fadeFrame);
       const start = audio.volume;
       const t0 = performance.now();
       function tick(now) {
         const t = clamp((now - t0) / dur, 0, 1);
         audio.volume = start + (target - start) * t;
-        if (t < 1) requestAnimationFrame(tick);
-        else if (target === 0) audio.pause();
+        if (t < 1) fadeFrame = requestAnimationFrame(tick);
+        else {
+          fadeFrame = 0;
+          if (target === 0) audio.pause();
+        }
       }
-      requestAnimationFrame(tick);
+      fadeFrame = requestAnimationFrame(tick);
+    }
+
+    async function startMusic() {
+      try {
+        await audio.play();
+        setPlaying(true);
+        fadeVolume(0.4, 900);
+        return true;
+      } catch (e) {
+        setPlaying(false);
+        return false;
+      }
+    }
+
+    let optedOut = false;
+    try { optedOut = localStorage.getItem('wedding-music-disabled') === '1'; } catch (e) {}
+    if (!optedOut) {
+      startMusic().then((started) => {
+        if (!started) showToast('자동재생이 제한되면 오른쪽 위 음표를 눌러 재생해 주세요.');
+      });
     }
 
     btn.addEventListener('click', async () => {
@@ -539,19 +571,13 @@
       void btn.offsetWidth;
       btn.classList.add('is-rippling');
       haptic(10);
-      try {
-        if (audio.paused) {
-          if (!audio.src) audio.src = BGM_SRC;
-          await audio.play();
-          btn.setAttribute('aria-pressed', 'true');
-          fadeVolume(0.4, 1500);
-        } else {
-          fadeVolume(0, 600);
-          btn.setAttribute('aria-pressed', 'false');
-        }
-      } catch (e) {
-        btn.setAttribute('aria-pressed', 'false');
-        showToast('음원을 재생할 수 없습니다.');
+      if (audio.paused) {
+        setOptOut(false);
+        if (!(await startMusic())) showToast('음표 버튼을 다시 눌러 음악을 재생해 주세요.');
+      } else {
+        setOptOut(true);
+        fadeVolume(0, 600);
+        setPlaying(false);
       }
     });
   }
