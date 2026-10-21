@@ -264,7 +264,7 @@
     function startAuto() {
       if (isReduced() || userPaused || !inViewport) return;
       stopAuto();
-      auto = setInterval(() => show(idx + 1), 2500);
+      auto = setInterval(() => show(idx + 1), 1000);
     }
     function stopAuto() {
       if (auto) { clearInterval(auto); auto = null; }

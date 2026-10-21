@@ -1457,15 +1457,15 @@ body { background-image: none; }
   overflow: visible;
   pointer-events: none;
   clip-path: inset(0 100% 0 0);
-  opacity: .48;
+  opacity: .68;
   filter: drop-shadow(0 1px 2px #172a2d55);
-  animation: loveWrite 3.2s cubic-bezier(.55,.02,.35,1) 1.45s both;
+  animation: loveWrite 2.2s cubic-bezier(.55,.02,.35,1) .7s both;
 }
 .hero-love text {
   fill: #fff;
   font-family: "Dancing Script", var(--font-script);
   font-size: 250px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0;
   font-style: normal;
 }

@@ -1,0 +1,21 @@
+name: Keep Supabase active
+
+on:
+  schedule:
+    # 09:17, 15:17, and 21:17 Korea Standard Time (UTC is 9 hours behind).
+    - cron: '17 0,6,12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  activity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@v4
+
+      - name: Send a read-only database request
+        run: node scripts/wake-supabase.mjs
