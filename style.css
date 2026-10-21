@@ -931,8 +931,8 @@ body::before {
 .acc-list li {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 6px 12px;
+  padding: 7px 18px;
   border-top: 1px solid rgba(142, 125, 117, 0.15);
   flex-wrap: wrap;
 }
