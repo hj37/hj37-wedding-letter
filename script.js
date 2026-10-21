@@ -11,7 +11,7 @@
   // ---------------------------------------------------------
   const KAKAO_JS_KEY     = '0a9b30e3ac311ebc75af75fb3290f2cd'; // 카카오 JavaScript 키
   const MYBOX_UPLOAD_URL  = ''; // placeholder: 하객 업로드 허용 MYBOX 폴더 공유 링크
-  const BGM_SRC          = 'audio/wedding-piano-drum.mp3';
+  const BGM_SRC          = 'audio/bgm.mp3';
   // Public anon key: the database limits the shared guestbook to reading and adding messages.
   const SUPABASE_URL      = 'https://lcukpufzpijhwqdpejyx.supabase.co';
   const SUPABASE_KEY      = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjdWtwdWZ6cGlqaHdxZHBlanl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3NTE4MjAsImV4cCI6MjA3NzMyNzgyMH0.s1qRdFzgS8SPBYcA419eEwrBV6fXslHxoaZIrYZNovg';
