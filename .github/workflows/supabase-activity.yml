@@ -2,8 +2,8 @@ name: Keep Supabase active
 
 on:
   schedule:
-    # Daily at 09:17 Korea Standard Time.
-    - cron: '17 0 * * *'
+    # 09:17, 15:17, and 21:17 Korea Standard Time.
+    - cron: '17 0,6,12 * * *'
     # Record repository activity on the first of each month at 09:23 KST.
     - cron: '23 0 1 * *'
   workflow_dispatch:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   activity:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '17 0 * * *'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '17 0,6,12 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 2
     permissions:
