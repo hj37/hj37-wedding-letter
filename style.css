@@ -1737,4 +1737,9 @@ body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
   .mini-home-profile { padding-inline: 6px; }.mini-home-visitors { gap: 3px; font-size: 7px; }.mini-home-profile-meta b { font-size: 8px; }
 }
 @media (prefers-reduced-motion: reduce) { .view-switch { backdrop-filter: none; } }
+.view-switch { gap: 8px; padding-top: 10px; background: #fffefa; box-shadow: 0 -5px 18px #4a42330d; }
+.view-switch button { border-color: #d8d4ca; background: #fff; color: #5d584f; font-size: 13px; font-weight: 600; }
+.view-switch button[data-view="mini"] { border-color: #718564; background: #82966f; color: #fff; box-shadow: 0 2px 7px #657b5733; }
+.view-switch button[data-view="mini"].is-active { border-color: #64795a; background: #6f8761; }
+.view-switch button[data-view="classic"].is-active { border-color: #b6c3a8; background: #e8ecdf; color: #46583e; }
 
