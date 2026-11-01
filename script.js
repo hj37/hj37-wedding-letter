@@ -1016,8 +1016,48 @@
     const controls = $$('.view-switch [data-view]');
     if (!classic || !mini || !controls.length) return;
 
+    // Reuse the real gallery, guestbook, and venue nodes so their existing
+    // carousel, lightbox, database form, and map behavior stays intact.
+    const movable = ['gallery', 'guestbook', 'venue'].map((id) => {
+      const section = $('#' + id);
+      const slot = $('[data-mini-slot="' + id + '"]');
+      if (!section || !slot || !section.parentNode) return null;
+      const marker = document.createComment('original ' + id + ' position');
+      section.parentNode.insertBefore(marker, section);
+      return { section, slot, marker };
+    }).filter(Boolean);
+
+    const showMiniPage = (page) => {
+      const content = $('.mini-home-content');
+      const safePage = $('[data-mini-panel="' + page + '"]') ? page : 'home';
+      $$('.mini-home-tabs [data-mini-page]').forEach((button) => {
+        const active = button.dataset.miniPage === safePage;
+        button.classList.toggle('is-active', active);
+        if (active) button.setAttribute('aria-current', 'page');
+        else button.removeAttribute('aria-current');
+      });
+      $$('.mini-home-view').forEach((panel) => { panel.hidden = panel.dataset.miniPanel !== safePage; });
+      content?.classList.toggle('is-subpage', safePage !== 'home');
+      if (safePage === 'venue') window.setTimeout(() => kakaoMapInstance?.relayout(), 80);
+    };
+
+    const moveMiniSections = (toMini) => movable.forEach(({ section, slot, marker }) => {
+      if (toMini) {
+        slot.append(section);
+        section.classList.add('is-visible');
+      } else if (marker.parentNode) {
+        marker.parentNode.insertBefore(section, marker.nextSibling);
+      }
+    });
+
     const setView = (view, scroll = true) => {
       const isMini = view === 'mini';
+      if (isMini) {
+        moveMiniSections(true);
+        showMiniPage('home');
+      } else {
+        moveMiniSections(false);
+      }
       classic.hidden = isMini;
       mini.hidden = !isMini;
       controls.forEach((button) => {
@@ -1033,10 +1073,19 @@
     $$('[data-mini-jump]').forEach((link) => link.addEventListener('click', (event) => {
       event.preventDefault();
       const selector = link.dataset.miniJump;
-      setView('classic', false);
-      const destination = selector && $(selector);
-      if (destination) window.setTimeout(() => destination.scrollIntoView({ behavior: isReduced() ? 'auto' : 'smooth', block: 'start' }), 40);
+      const page = selector && selector.slice(1);
+      if (!page) return;
+      const isMini = !mini.hidden;
+      if (isMini && $('[data-mini-panel="' + page + '"]')) {
+        showMiniPage(page);
+        window.scrollTo({ top: 0, behavior: isReduced() ? 'auto' : 'smooth' });
+      } else {
+        setView('classic', false);
+        const destination = selector && $(selector);
+        if (destination) window.setTimeout(() => destination.scrollIntoView({ behavior: isReduced() ? 'auto' : 'smooth', block: 'start' }), 40);
+      }
     }));
+    $$('.mini-home-tabs [data-mini-page]').forEach((button) => button.addEventListener('click', () => showMiniPage(button.dataset.miniPage)));
 
     const dday = $('#mini-home-dday');
     if (dday) {
@@ -1048,6 +1097,7 @@
     }
   }
 
+  let kakaoMapInstance = null;
   function setupKakaoMap() {
     const mapElement = $('#map');
     const fallback = $('#map-fallback');
@@ -1068,6 +1118,7 @@
             draggable: true,
             scrollwheel: false
           });
+          kakaoMapInstance = map;
           const marker = new maps.Marker({ map, position });
           const info = new maps.InfoWindow({
             content: `<div class="kakao-map-label">${placeName}</div>`,

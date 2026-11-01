@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Caveat:wght@400;500&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=mini-home-chibi-sprites-20261101">
+  <link rel="stylesheet" href="style.css?v=mini-home-internal-pages-20261101">
 </head>
 <body>
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
@@ -325,24 +325,40 @@
         </aside>
         <section class="mini-home-main">
           <nav class="mini-home-tabs" aria-label="미니홈피 메뉴">
-            <button class="is-active" type="button" data-mini-tab="home" aria-current="page">미니홈</button>
-            <button type="button" data-mini-jump="#gallery">사진첩</button>
-            <button type="button" data-mini-jump="#guestbook">방명록</button>
-            <button type="button" data-mini-jump="#venue">오시는 길</button>
+            <button class="is-active" type="button" data-mini-page="home" aria-current="page">미니홈</button>
+            <button type="button" data-mini-page="gallery">사진첩</button>
+            <button type="button" data-mini-page="guestbook">방명록</button>
+            <button type="button" data-mini-page="venue">오시는 길</button>
           </nav>
-          <div class="mini-home-page-title"><div><span>2027.03.06</span><h1>우리의 작은 미니홈</h1></div><span class="mini-home-dday" id="mini-home-dday">D-</span></div>
-          <div class="mini-home-room-wrap">
-            <img class="mini-home-room" src="images/minihome-room.svg" alt="신랑과 신부가 함께 있는 픽셀아트 미니홈피 방">
-            <img class="mini-home-avatar mini-home-avatar-groom" src="images/minihome-couple-sprites.png" alt="반짝이는 눈의 신랑 도트 캐릭터">
-            <img class="mini-home-avatar mini-home-avatar-bride" src="images/minihome-couple-sprites.png" alt="긴 머리와 베일을 쓴 신부 도트 캐릭터">
-            <button class="mini-home-room-link" type="button" data-mini-jump="#gallery">우리의 사진첩 <span aria-hidden="true">↗</span></button>
+          <div class="mini-home-content-pages">
+            <div class="mini-home-view" data-mini-panel="home">
+              <div class="mini-home-page-title"><div><span>2027.03.06</span><h1>우리의 작은 미니홈</h1></div><span class="mini-home-dday" id="mini-home-dday">D-</span></div>
+              <div class="mini-home-room-wrap">
+                <img class="mini-home-room" src="images/minihome-room.svg" alt="신랑과 신부가 함께 있는 픽셀아트 미니홈피 방">
+                <img class="mini-home-avatar mini-home-avatar-groom" src="images/minihome-couple-sprites.png" alt="반짝이는 눈의 신랑 도트 캐릭터">
+                <img class="mini-home-avatar mini-home-avatar-bride" src="images/minihome-couple-sprites.png" alt="긴 머리와 베일을 쓴 신부 도트 캐릭터">
+                <button class="mini-home-room-link" type="button" data-mini-jump="#gallery">우리의 사진첩 <span aria-hidden="true">↗</span></button>
+              </div>
+              <div class="mini-home-latest">
+                <div class="mini-home-latest-head"><h2>새 소식</h2><span>OUR STORY</span></div>
+                <a href="#gallery" data-mini-jump="#gallery"><span class="mini-home-latest-icon">▧</span><span><b>사진첩</b><small>함께한 순간들을 구경해 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
+                <a href="#guestbook" data-mini-jump="#guestbook"><span class="mini-home-latest-icon">✎</span><span><b>방명록</b><small>축하의 마음을 남겨 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
+              </div>
+              <p class="mini-home-note">소중한 날, 반가운 마음으로 기다리겠습니다.</p>
+            </div>
+            <section class="mini-home-view mini-home-subpage" data-mini-panel="gallery" hidden aria-label="미니홈피 사진첩">
+              <header class="mini-home-subpage-head"><span>PHOTO ALBUM</span><h2>우리의 사진첩</h2><p>함께한 순간들을 한 장씩 넘겨 보세요.</p></header>
+              <div class="mini-home-subpage-slot" data-mini-slot="gallery"></div>
+            </section>
+            <section class="mini-home-view mini-home-subpage" data-mini-panel="guestbook" hidden aria-label="미니홈피 방명록">
+              <header class="mini-home-subpage-head"><span>GUEST BOOK</span><h2>축하의 마음</h2><p>반가운 마음을 이곳에 남겨 주세요.</p></header>
+              <div class="mini-home-subpage-slot" data-mini-slot="guestbook"></div>
+            </section>
+            <section class="mini-home-view mini-home-subpage" data-mini-panel="venue" hidden aria-label="미니홈피 오시는 길">
+              <header class="mini-home-subpage-head"><span>LOCATION</span><h2>오시는 길</h2><p>창원컨벤션센터에서 기다릴게요.</p></header>
+              <div class="mini-home-subpage-slot" data-mini-slot="venue"></div>
+            </section>
           </div>
-          <div class="mini-home-latest">
-            <div class="mini-home-latest-head"><h2>새 소식</h2><span>OUR STORY</span></div>
-            <a href="#gallery" data-mini-jump="#gallery"><span class="mini-home-latest-icon">▧</span><span><b>사진첩</b><small>함께한 순간들을 구경해 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
-            <a href="#guestbook" data-mini-jump="#guestbook"><span class="mini-home-latest-icon">✎</span><span><b>방명록</b><small>축하의 마음을 남겨 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
-          </div>
-          <p class="mini-home-note">소중한 날, 반가운 마음으로 기다리겠습니다.</p>
         </section>
       </div>
       <footer class="mini-home-footer"><span>© HOJIN &amp; SUNYOUNG</span><span>우리의 봄날에 초대합니다 ♡</span></footer>
@@ -368,7 +384,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js?v=mini-home-mode-20261101"></script>
+  <script src="script.js?v=mini-home-internal-pages-20261101"></script>
 </body>
 </html>
 

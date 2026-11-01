@@ -1708,6 +1708,48 @@ body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
 .mini-home-profile-meta span,.mini-home-profile-meta b { display: block; }.mini-home-profile-meta span { color: #a29a8d; font-size: 8px; }.mini-home-profile-meta b { color: #625d52; font-size: 9px; line-height: 1.45; }
 .mini-home-mood { margin-top: 6px; padding: 5px 3px; border-radius: 4px; background: #f0eee6; color: #938a7c; font-size: 8px; white-space: nowrap; }.mini-home-mood span { color: #b07c77; }.mini-home-mood b { margin-left: 3px; color: #6b816d; }
 .mini-home-main { min-width: 0; }
+.mini-home-content-pages { min-width: 0; }
+.mini-home-content.is-subpage { grid-template-columns: minmax(0,1fr); }
+.mini-home-content.is-subpage .mini-home-profile { display: none; }
+.mini-home-subpage { min-width: 0; padding-top: 10px; }
+.mini-home-subpage-head { margin: 2px 0 12px; padding: 0 0 10px; border-bottom: 1px dashed #e2ddd2; }
+.mini-home-subpage-head > span { color: #a49b8b; font: 8px var(--font-en-serif); letter-spacing: .14em; }
+.mini-home-subpage-head h2 { margin: 3px 0; color: #514d44; font: 600 14px var(--font-ko-sans); }
+.mini-home-subpage-head p { margin: 0; color: #8b8478; font-size: 9px; line-height: 1.6; }
+.mini-home-subpage-slot { min-width: 0; }
+.mini-home-subpage-slot > .section { width: 100%; max-width: none; margin: 0; padding: 8px 0 4px; border: 0; border-radius: 0; background: transparent; box-shadow: none; opacity: 1; transform: none; }
+.mini-home-subpage-slot > .section .section-eyebrow,
+.mini-home-subpage-slot > .section .section-title { display: none; }
+.mini-home-subpage-slot .gallery-section { padding-top: 8px; background: transparent; }
+.mini-home-subpage-slot .gallery-stage { max-width: 100%; border: 1px solid #e3dfd5; border-radius: 7px; background: #f3f1eb; }
+.mini-home-subpage-slot .gallery-nav { width: 30px; height: 30px; background: #fffefaed; color: #686256; }
+.mini-home-subpage-slot .gallery-dots { margin-top: 10px; }
+.mini-home-subpage-slot .guestbook { padding: 0; border: 0; border-radius: 0; background: transparent; }
+.mini-home-subpage-slot .guestbook-message { margin: 0 0 12px; font-size: 9px; }
+.mini-home-subpage-slot .guestbook-form { gap: 7px; padding: 11px; border-color: #e3dfd5; border-radius: 7px; }
+.mini-home-subpage-slot .guestbook-form label { margin-top: 2px; font-size: 10px; }
+.mini-home-subpage-slot .guestbook-form input,
+.mini-home-subpage-slot .guestbook-form textarea { min-height: 34px; padding: 8px; font-size: 10px; }
+.mini-home-subpage-slot .guestbook-form textarea { min-height: 75px; }
+.mini-home-subpage-slot .guestbook-form-foot .btn { min-height: 34px; padding-inline: 10px; font-size: 10px; }
+.mini-home-subpage-slot .guestbook-board-head { margin: 15px 1px 8px; }
+.mini-home-subpage-slot .guestbook-board-head h3 { font-size: 11px; }
+.mini-home-subpage-slot .guestbook-board-head span,
+.mini-home-subpage-slot .guestbook-form-foot span { font-size: 9px; }
+.mini-home-subpage-slot .guestbook-entry,
+.mini-home-subpage-slot .guestbook-empty { padding: 10px; border-radius: 6px; }
+.mini-home-subpage-slot .guestbook-entry-head strong { font-size: 10px; }
+.mini-home-subpage-slot .guestbook-entry-head time { font-size: 8px; }
+.mini-home-subpage-slot .guestbook-entry-message { margin-top: 5px; font-size: 10px; }
+.mini-home-subpage-slot .venue { padding-top: 0; }
+.mini-home-subpage-slot .venue-name { font-size: 13px; }
+.mini-home-subpage-slot .venue-hall,
+.mini-home-subpage-slot .venue-addr { font-size: 10px; }
+.mini-home-subpage-slot .map-shell { margin: 10px 0; }
+.mini-home-subpage-slot .venue-route-tabs [role="tab"] { padding: 7px 3px; font-size: 9px; }
+.mini-home-subpage-slot .route-panel { padding: 10px; font-size: 10px; }
+.mini-home-subpage-slot .route-panel h3 { font-size: 10px; }
+.mini-home-subpage-slot .venue-actions .btn { min-height: 34px; padding: 6px; font-size: 9px; }
 .mini-home-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-bottom: 1px solid #dedbd3; }
 .mini-home-tabs button { min-width: 0; min-height: 36px; padding: 4px 2px; border-bottom: 2px solid transparent; color: #8c867a; font-size: 9px; white-space: nowrap; }
 .mini-home-tabs button.is-active { border-bottom-color: #96a286; color: #59644f; font-weight: 700; }
