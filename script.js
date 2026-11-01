@@ -1106,7 +1106,8 @@
       const renderVisitors = () => {
         const entries = $$('.guestbook-entry', guestbookList);
         const countText = $('#guestbook-entry-count')?.textContent.trim();
-        visitCount.textContent = countText && countText !== '불러오는 중' ? `${countText} 방문` : '방문 인사';
+        const guestCount = Number.parseInt(countText, 10);
+        visitCount.textContent = Number.isFinite(guestCount) ? `${guestCount}명` : '방문 인사';
         visitorList.replaceChildren();
         if (!entries.length) {
           const empty = document.createElement('li');
