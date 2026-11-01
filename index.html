@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Caveat:wght@400;500&family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 
-  <link rel="stylesheet" href="style.css?v=gallery-8-music-autoplay-v2-20261021">
+  <link rel="stylesheet" href="style.css?v=mini-home-mode-20261101">
 </head>
 <body>
   <!-- 배경 모션은 초대장 사진과 글에 집중하도록 비활성화 -->
@@ -304,6 +304,56 @@
     </footer>
   </main>
 
+  <main class="mini-home card" id="mini-home" hidden aria-label="미니홈피 버전 청첩장">
+    <div class="mini-home-window">
+      <div class="mini-home-browser-bar" aria-hidden="true">
+        <span class="browser-lights"><i></i><i></i><i></i></span>
+        <span class="browser-address">cyworld.com / hj-sy</span>
+      </div>
+      <header class="mini-home-header">
+        <div class="mini-home-brand"><span class="mini-home-mark">♡</span><span>Hojin &amp; Sunyoung <small>MINI HOMEPAGE</small></span></div>
+        <p class="mini-home-visitors"><span>OUR</span> <b>STORY</b><i></i><span>EST.</span> <b>2027</b></p>
+      </header>
+      <div class="mini-home-content">
+        <aside class="mini-home-profile">
+          <div class="mini-home-profile-photo"><img src="images/couple-bride.svg" alt="픽셀아트 신부 캐릭터"></div>
+          <p class="mini-home-profile-name">호진 <span>♡</span> 선영</p>
+          <p class="mini-home-profile-copy">우리의 작은 기록,<br>함께 나누고 싶은 날</p>
+          <div class="mini-home-profile-meta"><span>결혼식</span><b>2027. 03. 06</b></div>
+          <div class="mini-home-profile-meta"><span>장소</span><b>CECO 3층 컨벤션 홀</b></div>
+          <p class="mini-home-mood"><span aria-hidden="true">♪</span> 오늘의 기분 <b>설렘</b></p>
+        </aside>
+        <section class="mini-home-main">
+          <nav class="mini-home-tabs" aria-label="미니홈피 메뉴">
+            <button class="is-active" type="button" data-mini-tab="home" aria-current="page">미니홈</button>
+            <button type="button" data-mini-jump="#gallery">사진첩</button>
+            <button type="button" data-mini-jump="#guestbook">방명록</button>
+            <button type="button" data-mini-jump="#venue">오시는 길</button>
+          </nav>
+          <div class="mini-home-page-title"><div><span>2027.03.06</span><h1>우리의 작은 미니홈</h1></div><span class="mini-home-dday" id="mini-home-dday">D-</span></div>
+          <div class="mini-home-room-wrap">
+            <img class="mini-home-room" src="images/minihome-room.svg" alt="신랑과 신부가 함께 있는 픽셀아트 미니홈피 방">
+            <img class="mini-home-avatar mini-home-avatar-groom" src="images/couple-groom.svg" alt="신랑 픽셀 캐릭터">
+            <img class="mini-home-avatar mini-home-avatar-bride" src="images/couple-bride.svg" alt="신부 픽셀 캐릭터">
+            <button class="mini-home-room-link" type="button" data-mini-jump="#gallery">우리의 사진첩 <span aria-hidden="true">↗</span></button>
+          </div>
+          <div class="mini-home-latest">
+            <div class="mini-home-latest-head"><h2>새 소식</h2><span>OUR STORY</span></div>
+            <a href="#gallery" data-mini-jump="#gallery"><span class="mini-home-latest-icon">▧</span><span><b>사진첩</b><small>함께한 순간들을 구경해 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
+            <a href="#guestbook" data-mini-jump="#guestbook"><span class="mini-home-latest-icon">✎</span><span><b>방명록</b><small>축하의 마음을 남겨 주세요</small></span><span class="mini-home-latest-arrow">›</span></a>
+          </div>
+          <p class="mini-home-note">소중한 날, 반가운 마음으로 기다리겠습니다.</p>
+        </section>
+      </div>
+      <footer class="mini-home-footer"><span>© HOJIN &amp; SUNYOUNG</span><span>우리의 봄날에 초대합니다 ♡</span></footer>
+    </div>
+  </main>
+
+  <nav class="view-switch" aria-label="청첩장 보기 방식">
+    <button type="button" class="is-active" data-view="classic" aria-pressed="true">기본 청첩장</button>
+    <button type="button" data-view="mini" aria-pressed="false">미니홈피 버전</button>
+  </nav>
+
   <!-- 라이트박스 모달 -->
   <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="사진 확대 보기">
     <button class="lightbox-close" id="lightbox-close" type="button" aria-label="닫기">
@@ -318,7 +368,7 @@
   <!-- placeholder: 카카오 SDK (KAKAO_JS_KEY 발급 후 활성화) -->
   <!-- <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js" crossorigin="anonymous"></script> -->
 
-  <script src="script.js?v=gallery-8-music-autoplay-v2-20261021"></script>
+  <script src="script.js?v=mini-home-mode-20261101"></script>
 </body>
 </html>
 

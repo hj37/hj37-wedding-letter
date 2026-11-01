@@ -1007,6 +1007,47 @@
     });
   }
 
+  // ---------------------------------------------------------
+  // Alternate Cyworld-inspired mini-homepage view
+  // ---------------------------------------------------------
+  function setupInvitationViewSwitch() {
+    const classic = $('#card');
+    const mini = $('#mini-home');
+    const controls = $$('.view-switch [data-view]');
+    if (!classic || !mini || !controls.length) return;
+
+    const setView = (view, scroll = true) => {
+      const isMini = view === 'mini';
+      classic.hidden = isMini;
+      mini.hidden = !isMini;
+      controls.forEach((button) => {
+        const active = button.dataset.view === view;
+        button.classList.toggle('is-active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      document.body.classList.toggle('is-mini-home', isMini);
+      if (scroll) window.scrollTo({ top: 0, behavior: isReduced() ? 'auto' : 'smooth' });
+    };
+
+    controls.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view)));
+    $$('[data-mini-jump]').forEach((link) => link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const selector = link.dataset.miniJump;
+      setView('classic', false);
+      const destination = selector && $(selector);
+      if (destination) window.setTimeout(() => destination.scrollIntoView({ behavior: isReduced() ? 'auto' : 'smooth', block: 'start' }), 40);
+    }));
+
+    const dday = $('#mini-home-dday');
+    if (dday) {
+      const weddingDay = new Date(2027, 2, 6);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const remaining = Math.ceil((weddingDay.getTime() - today.getTime()) / 86400000);
+      dday.textContent = remaining > 0 ? `D-${remaining}` : remaining === 0 ? 'D-DAY' : `D+${Math.abs(remaining)}`;
+    }
+  }
+
   function setupKakaoMap() {
     const mapElement = $('#map');
     const fallback = $('#map-fallback');
@@ -1082,6 +1123,7 @@
     setupVenueDirections();
     setupKakaoMap();
     setupExternalLinks();
+    setupInvitationViewSwitch();
 
     // reduced-motion 변경 시 단순 reload (모션 일관성 보장)
     if (reducedMotion.addEventListener) {
