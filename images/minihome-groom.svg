@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 128" shape-rendering="crispEdges">
+  <!-- pixel chibi groom: distinct parted hair, bright eyes, and a classic tux -->
+  <g stroke="#493a35" stroke-width="2" stroke-linejoin="round">
+    <path fill="#29272a" d="M23 23V15h6V9h10V5h23v5h9v7h5v16h-6v8h-8V27H36v9h-9v-7h-6z"/>
+    <path fill="#dcae8d" d="M28 21h8v-6h27v6h8v23h-6v8H35v-8h-7z"/>
+    <path fill="#dcae8d" d="M27 27h-5v12h7m41-12h5v12h-7"/>
+    <path fill="#322d2c" stroke="none" d="M35 31h9v7h-9zm19 0h9v7h-9z"/>
+    <path fill="#fff" stroke="none" d="M37 31h3v3h-3zm19 0h3v3h-3z"/>
+    <path fill="#715047" stroke="none" d="M38 34h4v4h-4zm19 0h4v4h-4z"/>
+    <path fill="#ef9d9a" stroke="none" d="M30 41h5v3h-5zm33 0h5v3h-5z"/>
+    <path fill="#9b5a58" stroke="none" d="M41 46h13v3H41z"/>
+    <path fill="#29272a" stroke="none" d="M25 14h11v8h-8v10h-7V20h4zm34-6h9v8h6v8h-9v-6h-8v6H36v-6h13V9h10z"/>
+    <path fill="#f6f1e7" d="M39 53h18l8 9-6 11H37l-6-11z"/>
+    <path fill="#30343c" d="M34 55h7l7 9 7-9h7l10 11 8 35H16l7-35z"/>
+    <path fill="#f4f0e7" stroke="none" d="M43 56h10l-5 10z"/>
+    <path fill="#b68b63" stroke="none" d="M46 66h4v5h-4zm0 8h4v5h-4z"/>
+    <path fill="#22252b" d="M20 101h25v13H32v8H16v-8h4zm31 0h25v13h4v8H61v-8H51z"/>
+    <path fill="#f8f4eb" stroke="none" d="M16 117h16v5H11v-3h5zm46 0h14v5H58v-3h4z"/>
+  </g>
+  <path fill="#fff" d="M38 30h3v3h-3zm19 0h3v3h-3z"/>
+  <path fill="#f8d98f" d="M40 31h2v2h-2zm19 0h2v2h-2z"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 128" shape-rendering="crispEdges">
+  <!-- pixel chibi bride: long dark hair, bright eyes, veil, and a tiny bouquet -->
+  <g stroke="#59423e" stroke-width="2" stroke-linejoin="round">
+    <path fill="#f8f2e8" d="M20 27h8V17h8v-7h26v7h8v13h6v50h-8V68h-8v11H28v-9h-8z"/>
+    <path fill="#392c2d" d="M23 28V17h7V9h10V5h19v5h10v7h6v18h-7V23h-8v-4H37v6h-8v15h-7z"/>
+    <path fill="#392c2d" d="M22 38h7v36h-7zm44-15h7v50h-7z"/>
+    <path fill="#e6b99a" d="M30 22h7v-5h24v6h7v23h-7v7H37v-7h-7z"/>
+    <path fill="#e6b99a" d="M29 29h-5v11h7m37-11h5v11h-7"/>
+    <path fill="#403333" stroke="none" d="M36 31h9v7h-9zm18 0h9v7h-9z"/>
+    <path fill="#fff" stroke="none" d="M38 31h3v3h-3zm18 0h3v3h-3z"/>
+    <path fill="#a96c5e" stroke="none" d="M39 34h4v4h-4zm18 0h4v4h-4z"/>
+    <path fill="#ef9a9c" stroke="none" d="M31 41h6v3h-6zm31 0h6v3h-6z"/>
+    <path fill="#a45d61" stroke="none" d="M42 47h12v3H42z"/>
+    <path fill="#f5d98a" d="M39 8h18v5H39zm5-4h8v4h-8z"/>
+    <path fill="#fff" d="M34 53h28l9 12-13 18H39L26 65z"/>
+    <path fill="#e8dfd4" stroke="none" d="M47 54h8l-7 17h-5z"/>
+    <path fill="#e7b9a0" d="M30 62h8v14h-8zm29 0h8v14h-8z"/>
+    <path fill="#faf5eb" d="M37 80h26l11 22H25z"/>
+    <path fill="#e8dfd4" stroke="none" d="M44 82h10l-7 20h-8z"/>
+    <path fill="#b2c197" d="M69 70h5v12h-5z"/>
+    <path fill="#e8a2a0" stroke="none" d="M67 65h5v5h-5zm6 3h5v5h-5zm-4 7h5v4h-5z"/>
+    <path fill="#f6f0e6" d="M29 101h31v12H49v9H30v-8h-6z"/>
+    <path fill="#e8dfd4" stroke="none" d="M30 112h19v6H30z"/>
+  </g>
+  <path fill="#fff" d="M39 30h3v3h-3zm18 0h3v3h-3z"/>
+  <path fill="#f8d98f" d="M41 31h2v2h-2zm18 0h2v2h-2z"/>
+</svg>
