@@ -1018,7 +1018,7 @@
 
     // Reuse the real gallery, guestbook, and venue nodes so their existing
     // carousel, lightbox, database form, and map behavior stays intact.
-    const movable = ['gallery', 'guestbook', 'venue'].map((id) => {
+    const movable = ['gallery', 'guestbook', 'venue', 'account'].map((id) => {
       const section = $('#' + id);
       const slot = $('[data-mini-slot="' + id + '"]');
       if (!section || !slot || !section.parentNode) return null;
@@ -1086,6 +1086,58 @@
       }
     }));
     $$('.mini-home-tabs [data-mini-page]').forEach((button) => button.addEventListener('click', () => showMiniPage(button.dataset.miniPage)));
+
+    const accountShortcut = $('[data-mini-account]');
+    accountShortcut?.addEventListener('click', () => {
+      if (!mini.hidden) {
+        showMiniPage('account');
+        window.scrollTo({ top: 0, behavior: isReduced() ? 'auto' : 'smooth' });
+        return;
+      }
+      setView('classic', false);
+      window.setTimeout(() => $('#account')?.scrollIntoView({ behavior: isReduced() ? 'auto' : 'smooth', block: 'start' }), 40);
+    });
+
+    // Show recent guestbook notes as the mini-room's shared visitor wall.
+    const guestbookList = $('#guestbook-list');
+    const visitorList = $('#mini-room-visitor-list');
+    const visitCount = $('#mini-room-visit-count');
+    if (guestbookList && visitorList && visitCount) {
+      const renderVisitors = () => {
+        const entries = $$('.guestbook-entry', guestbookList);
+        const countText = $('#guestbook-entry-count')?.textContent.trim();
+        visitCount.textContent = countText && countText !== '불러오는 중' ? `${countText} 방문` : '방문 인사';
+        visitorList.replaceChildren();
+        if (!entries.length) {
+          const empty = document.createElement('li');
+          empty.className = 'mini-room-visitor-empty';
+          empty.textContent = '첫 방문 인사를 기다리고 있어요.';
+          visitorList.append(empty);
+          return;
+        }
+        entries.slice(0, 3).forEach((entry) => {
+          const item = document.createElement('li');
+          item.className = 'mini-room-visitor';
+          const avatar = document.createElement('span');
+          avatar.className = 'mini-room-visitor-mark';
+          avatar.setAttribute('aria-hidden', 'true');
+          avatar.textContent = '♡';
+          const note = document.createElement('span');
+          note.className = 'mini-room-visitor-note';
+          const name = document.createElement('b');
+          name.textContent = $('strong', entry)?.textContent || '익명의 하객';
+          const message = document.createElement('small');
+          message.textContent = $('.guestbook-entry-message', entry)?.textContent || '';
+          note.append(name, message);
+          item.append(avatar, note);
+          visitorList.append(item);
+        });
+      };
+      renderVisitors();
+      new MutationObserver(renderVisitors).observe(guestbookList, { childList: true, subtree: true });
+      const guestbookCount = $('#guestbook-entry-count');
+      if (guestbookCount) new MutationObserver(renderVisitors).observe(guestbookCount, { childList: true, characterData: true, subtree: true });
+    }
 
     const dday = $('#mini-home-dday');
     if (dday) {
