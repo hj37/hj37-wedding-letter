@@ -1742,4 +1742,5 @@ body { padding-bottom: calc(74px + env(safe-area-inset-bottom)); }
 .view-switch button[data-view="mini"] { border-color: #718564; background: #82966f; color: #fff; box-shadow: 0 2px 7px #657b5733; }
 .view-switch button[data-view="mini"].is-active { border-color: #64795a; background: #6f8761; }
 .view-switch button[data-view="classic"].is-active { border-color: #b6c3a8; background: #e8ecdf; color: #46583e; }
+.toast { bottom: calc(72px + env(safe-area-inset-bottom)); z-index: 21; }
 
